@@ -3,29 +3,35 @@ import QtQuick
 Item {
     property string coinName: ""
     property string currencyAbbreviation: ""
-
-    property string combinedValues: coinName+currencyAbbreviation
-    property int refreshRate: 15 // Tasa de actualización en minutos
-    property int price: -1
+    property int decimalPlaces: 2
+    property string combinedValues: coinName + currencyAbbreviation
+    property int refreshRate: 3 // Refresh rate in minutes
+    property real price: -1
     property bool isFirstConsultation: true
     property string link: "https://api.coingecko.com/api/v3/simple/price?ids=" + coinName + "&vs_currencies=" + currencyAbbreviation
 
-    // Detecta cambios en el precio
+    // Detect price changes
     onPriceChanged: {
         if (price !== -1 && price !== "") {
-            update()
+            updatePrice()
         }
     }
+
     onCombinedValuesChanged: {
-        price = (-1)
-        updateNow()
+        price = -1
+        updatePrice()
     }
 
-    function updateNow() {
+    function updatePrice() {
         link = "https://api.coingecko.com/api/v3/simple/price?ids=" + coinName + "&vs_currencies=" + currencyAbbreviation
-        updatePrice(function(result) {
-            if (result) {
-                price = parseInt(result);
+        updateAPI(function(result) {
+            if (result !== null) {
+                // DEBUG only: console.log("Value from API:", result);
+
+                // Storing numeric value
+                price = parseFloat(result);
+
+                // DEBUG only: console.log("Price catched:", price);
                 isFirstConsultation = false;
             } else {
                 retry.start();
@@ -33,10 +39,9 @@ Item {
         });
     }
 
-    // Función para actualizar el precio desde la API de CoinGecko
-    function updatePrice(callback) {
+    // Update price from CoinGecko API
+    function updateAPI(callback) {
         let url = link;
-
         let req = new XMLHttpRequest();
         req.open("GET", url, true);
 
@@ -45,13 +50,19 @@ Item {
                 if (req.status === 200) {
                     let datos = JSON.parse(req.responseText);
                     let coin = datos[coinName];
-                    let priceInCurrency = coin[currencyAbbreviation];
 
-                    callback(priceInCurrency);
-                    console.log(coin)
+                    if (coin && coin[currencyAbbreviation]) {
+                        let priceInCurrency = coin[currencyAbbreviation];
+                        // DEBUG only: console.log("Full reply from API:", JSON.stringify(datos, null, 2));
+                        // DEBUG only: console.log("Coin price:", priceInCurrency);
+                        callback(priceInCurrency);
+                    } else {
+                        // DEBUG only: console.error("Error: no data for the desired coin.");
+                        callback(null);
+                    }
                 } else {
-                    console.error(`Error en la solicitud: ${req.status}`);
-                    callback(null); // En caso de error, devuelve null al callback
+                    // DEBUG only: console.error(`Query error: ${req.status}`);
+                    callback(null);
                 }
             }
         };
@@ -59,30 +70,27 @@ Item {
         req.send();
     }
 
-    // Temporizador para reintentar solicitudes fallidas
     Timer {
         id: retry
-        interval: 5000 // Reintenta cada 5 segundos
+        interval: 15000 // Retry after 15 seconds
         repeat: false
         running: false
         onTriggered: {
-            updateNow()
+            updatePrice()
         }
     }
 
-    // Temporizador para actualizaciones periódicas
     Timer {
-        id: update
-        interval: refreshRate * 60000 // Convierte minutos a milisegundos
+        id: updateTimer
+        interval: refreshRate * 60000 // Convert from minutes to milliseconds
         repeat: true
         running: true
         onTriggered: {
-            updateNow()
+            updatePrice()
         }
     }
 
-    // Primera consulta al completar el componente
     Component.onCompleted: {
-        updateNow()
+        updatePrice()
     }
 }

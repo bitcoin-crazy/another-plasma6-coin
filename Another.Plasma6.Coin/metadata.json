@@ -1,23 +1,21 @@
 {
+    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
-                "Email": "adolfo@librepixels.com",
-                "Name": "zayronxio"
+                "Name": "bitcoin-crazy"
             }
         ],
-        "Name": "Plasma Coin",
-        "Id": "Plasma.Coin",
-        "Description": "",
+        "Name": "Another Plasma6 Coin",
+        "Id": "Another.Plasma6.Coin",
+        "Description": "Show the price of Bitcoin and other cryptocurrencies",
         "Category": "Utilities",
         "Icon": "view-currency-list",
         "EnabledByDefault": true,
         "License": "GPL-3.0+",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
-        "Version": "0.1",
-        "Website": ""
+        "BugReportUrl": "https://github.com/bitcoin-crazy/another-plasma6-coin/issues",
+        "Version": "1.0",
+        "Website": "https://github.com/bitcoin-crazy/another-plasma6-coin/"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
     "X-Plasma-MainScript": "ui/main.qml"

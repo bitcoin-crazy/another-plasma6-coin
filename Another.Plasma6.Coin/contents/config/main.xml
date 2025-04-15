@@ -12,17 +12,26 @@
     <entry name="textBold" type="bool">
       <default>true</default>
     </entry>
-	<entry name="coinName" type="string">
-            <default>bitcoin</default>
+    <entry name="coinName" type="string">
+      <default>bitcoin</default>
     </entry>
     <entry name="currency" type="string">
-		<default>usd</default>
-	</entry>
+      <default>usd</default>
+    </entry>
     <entry name="symbol" type="string">
-		<default>$</default>
-	</entry>
+      <default>$</default>
+    </entry>
     <entry name="coinNameAbbreviation" type="string">
       <default>BTC</default>
+    </entry>
+    <entry name="decimalPlaces" type="int">
+      <default>0</default>
+    </entry>
+    <entry name="showCoinName" type="bool">
+      <default>true</default>
+    </entry>
+    <entry name="showPair" type="bool">
+      <default>false</default>
     </entry>
   </group>
 
