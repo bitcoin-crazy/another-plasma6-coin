@@ -1,0 +1,24 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "adolfo@librepixels.com",
+                "Name": "zayronxio"
+            }
+        ],
+        "Name": "Plasma Coin",
+        "Id": "Plasma.Coin",
+        "Description": "",
+        "Category": "Utilities",
+        "Icon": "view-currency-list",
+        "EnabledByDefault": true,
+        "License": "GPL-3.0+",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "0.1",
+        "Website": ""
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml"
+}
