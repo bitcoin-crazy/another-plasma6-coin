@@ -69,7 +69,7 @@ __Another Plasma6 Coin__ arrives with a limited number of coins and currencies. 
 
 * For coins:
   * Edit `~/.local/share/plasma/plasmoids/Another.Plasma6.Coin/contents/ui/CoinModel.qml` and add a new entry.
-  * You must use the same `name` provided by CoinGecko via API. There is a list [here](https://www.coingecko.com/en/all-cryptocurrencies). Click the cursor over a coin name and observe its name at the end of the URL. E.g.: for Ethereum Classic, we have `https://www.coingecko.com/en/coins/ethereum-classic`, so `ethereum-classic` must be used if needed.
+  * You must use the same `name` provided by CoinGecko via API. See __TIP1__ below.
   * Example of an entry to be added:
     ```
     ListElement { name: "solana"; abbreviation: "SOL" }
@@ -79,7 +79,7 @@ __Another Plasma6 Coin__ arrives with a limited number of coins and currencies. 
 
 * For currencies:
   * Edit `~/.local/share/plasma/plasmoids/Another.Plasma6.Coin/contents/ui/CurrencyModel.qml` and add a new block.
-  * There is a list of currencies [here](https://docs.coingecko.com/reference/simple-supported-currencies).
+  * There is a list of currencies [here](https://docs.coingecko.com/reference/simple-supported-currencies). See __TIP2__ below.
   * Example of a block:
   ```
   ListElement {
@@ -97,7 +97,7 @@ __TIP1:__ The CoinGecko API provides a restricted number of coins. It is possibl
 $ curl -s 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd' | tr ',' '\n' | grep '"id":'
 ```
 
-If you receive a blank result, wait for 10 seconds and try again.
+If you receive a blank result (error 429 from CoinGecko), wait for 10 seconds and try again.
 
 It is also possible to get a list of available currencies.
 
