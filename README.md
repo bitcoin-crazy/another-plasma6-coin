@@ -97,6 +97,12 @@ $ curl -s 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd' | tr 
 
 If you receive a blank result, wait for 10 seconds and try again.
 
+It is also possible to get a list of available currencies.
+
+```
+$ curl -s 'https://api.coingecko.com/api/v3/simple/supported_vs_currencies' | tr ',' '\n' | tr -d '[]"'
+```
+
 __TIP2:__ It is possible to make tests against the CoinGecko API using the `curl` command. See an example for BTC/USD:
 
 ```
