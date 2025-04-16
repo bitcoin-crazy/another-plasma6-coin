@@ -10,7 +10,7 @@
         "Id": "Another.Plasma6.Coin",
         "Description": "Show the price of Bitcoin and other cryptocurrencies",
         "Category": "Utilities",
-        "Icon": "view-currency-list",
+        "Icon": "bitcoin128",
         "EnabledByDefault": true,
         "License": "GPL-3.0+",
         "BugReportUrl": "https://github.com/bitcoin-crazy/another-plasma6-coin/issues",
