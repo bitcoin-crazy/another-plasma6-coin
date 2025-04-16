@@ -9,6 +9,9 @@ This program was initially based on [Plasma Coin 1.0.2](https://store.kde.org/p/
 
 I am an anonymous programmer and I developed this applet for my personal utilization. Feel free to send pull requests.
 
+> [!NOTE]
+> This applet is available at [KDE Store](https://store.kde.org/p/2280323).
+
 
 ## How to install
 
