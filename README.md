@@ -16,12 +16,24 @@ I am an anonymous programmer and I developed this applet for my personal utiliza
 
 The best way to install this applet is via widget manager from KDE.
 
-1. Right-Click over the toolbar and select Add or Manage Wiggets.
+1. Right-Click over the toolbar and select `Add or Manage Wiggets`.
 2. Select `Get New` > `Download New Plasma Widgets` > `Another Plasma6 Coin`.
 3. Click Install button.
 4. Right-Click again over the toolbar and select `Add or Manage Wiggets`.
 5. Select `Another Plasma6 Coin` and drag it to the toolbar.
 6. Right-Click over the applet in toolbar and select `Configure Another Plasma6 Coin`.
+
+### Importing the tarball
+
+Another way to install __Another Plasma6 Coin__ is to make it importing the tarball.
+
+1. Download the final tarball `Another.Plasma6.Coin-<version>.tar.xz`
+2. Right-Click over the toolbar and select `Add or Manage Wiggets`.
+3. Select `Get New` > `Install Widget From Local File`.
+4. Select the downloaded tarball.
+5. Click `Add or Manage Widgets`.
+6. Select `Another Plasma6 Coin` and drag it to the toolbar.
+7. Right-Click over the applet in toolbar and select `Configure Another Plasma6 Coin`.
 
 ### Manual install
 
