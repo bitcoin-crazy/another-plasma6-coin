@@ -75,6 +75,7 @@ __Another Plasma6 Coin__ arrives with a limited number of coins and currencies. 
     ListElement { name: "solana"; abbreviation: "SOL" }
     ```
   * In the last example, `solana` is the name to be used to call the CoinGecko API and `SOL` is the ticker (symbol) to be shown in the KDE toolbar.
+  * It is not needed to restart KDE after adding new coins.
 
 * For currencies:
   * Edit `~/.local/share/plasma/plasmoids/Another.Plasma6.Coin/contents/ui/CurrencyModel.qml` and add a new block.
@@ -88,6 +89,7 @@ __Another Plasma6 Coin__ arrives with a limited number of coins and currencies. 
   }
   ```
   * In the last example, `US Dollar` is a name to visual identification of the currency in configuration block. `usd` will be used to call the CoinGecko API and to compose the pair name in the KDE toolbar. Currently, the `symbol` is not used.
+  * It is not needed to restart KDE after adding new currencies.
 
 __TIP1:__ The CoinGecko API provides a restricted number of coins. It is possible to get a list using the  `curl` command.
 
