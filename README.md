@@ -89,7 +89,15 @@ __Another Plasma6 Coin__ arrives with a limited number of coins and currencies. 
   ```
   * In the last example, `US Dollar` is a name to visual identification of the currency in configuration block. `usd` will be used to call the CoinGecko API and to compose the pair name in the KDE toolbar. Currently, the `symbol` is not used.
 
-__TIP:__ It is possible to make tests against the CoinGecko API using the `curl` command. See an example for BTC/USD:
+__TIP1:__ The CoinGecko API provides a restricted number of coins. It is possible to get a list using the  `curl` command.
+
+```
+$ curl -s 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd' | tr ',' '\n' | grep '"id":'
+```
+
+If you receive a blank result, wait for 10 seconds and try again.
+
+__TIP2:__ It is possible to make tests against the CoinGecko API using the `curl` command. See an example for BTC/USD:
 
 ```
 $ curl 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd'
@@ -111,4 +119,4 @@ The time refresh for prices is 3 minutes. This can be changed at `~/.local/share
 ## Limitations
 
 * CoinGecko discards intensive calls. I recommend do not use more than 5 widgets at the same time to avoid lose prices or to be blocked.
-* CoinGecko free API is a bit limited and it doesn't make available all possible coins.
+* CoinGecko free API is a bit limited and it doesn't make available all possible coins. See the __TIP1:__ above.
