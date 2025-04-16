@@ -98,7 +98,7 @@ Item {
                         implicitWidth: Kirigami.Units.iconSizes.small
                         implicitHeight: Kirigami.Units.iconSizes.small
                         ToolTip.visible: hovered
-                        ToolTip.text: i18n("Select the crypto you want to convert from (e.g., BTC, ETH). To add new crypto, see the README at https://github.com/bitcoin-crazy/another-plasma6-coin")
+                        ToolTip.text: i18n("More coins? See the README at https://github.com/bitcoin-crazy/another-plasma6-coin")
                         hoverEnabled: true
                         Layout.alignment: Qt.AlignVCenter
                     }
@@ -137,7 +137,7 @@ Item {
                         implicitWidth: Kirigami.Units.iconSizes.small
                         implicitHeight: Kirigami.Units.iconSizes.small
                         ToolTip.visible: hovered
-                        ToolTip.text: i18n("Select the crypto/currency you want to convert to (e.g., BTC, USD, BRL). To add new crypto/currency, see the README at https://github.com/bitcoin-crazy/another-plasma6-coin")
+                        ToolTip.text: i18n("More currencies? See the README at https://github.com/bitcoin-crazy/another-plasma6-coin")
                         hoverEnabled: true
                         Layout.alignment: Qt.AlignVCenter
                     }
