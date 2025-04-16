@@ -5,21 +5,45 @@ ListModel {
     ListElement { name: "ethereum"; abbreviation: "ETH" }
     ListElement { name: "solana"; abbreviation: "SOL" }
     ListElement { name: "tether"; abbreviation: "USDT" }
+    ListElement { name: "aave"; abbreviation: "AAVE" }
     ListElement { name: "aptos"; abbreviation: "APT" }
+    ListElement { name: "arbitrum"; abbreviation: "ARB" }
+    ListElement { name: "avalanche-2"; abbreviation: "AVAX" }
+    ListElement { name: "binancecoin"; abbreviation: "BNB" }
     ListElement { name: "bitget-token"; abbreviation: "BGB" }
     ListElement { name: "bitcoin-cash"; abbreviation: "BCH" }
+    ListElement { name: "bittensor"; abbreviation: "TAO" }
+    ListElement { name: "bonk"; abbreviation: "BONK" }
     ListElement { name: "cardano"; abbreviation: "ADA" }
     ListElement { name: "chainlink"; abbreviation: "LINK" }
+    ListElement { name: "cosmos"; abbreviation: "ATOM" }
     ListElement { name: "dogecoin"; abbreviation: "DOGE" }
     ListElement { name: "dai"; abbreviation: "DAI" }
+    ListElement { name: "ethena"; abbreviation: "ENA" }
+    ListElement { name: "filecoin"; abbreviation: "FIL" }
+    ListElement { name: "hedera-hashgraph"; abbreviation: "HBAR" }
     ListElement { name: "hyperliquid"; abbreviation: "HYPE" }
     ListElement { name: "litecoin"; abbreviation: "LTC" }
+    ListElement { name: "maker"; abbreviation: "MKR" }
+    ListElement { name: "mantle"; abbreviation: "MNT" }
+    ListElement { name: "monero"; abbreviation: "XMR" }
     ListElement { name: "near"; abbreviation: "NEAR" }
+    ListElement { name: "okb"; abbreviation: "OKB" }
+    ListElement { name: "ondo-finance"; abbreviation: "ONDO" }
+    ListElement { name: "optimism"; abbreviation: "OP" }
+    ListElement { name: "pax-gold"; abbreviation: "PAXG" }
     ListElement { name: "pepe"; abbreviation: "PEPE" }
+    ListElement { name: "pi-network"; abbreviation: "PI" }
     ListElement { name: "polkadot"; abbreviation: "DOT" }
+    ListElement { name: "render-token"; abbreviation: "RENDER" }
     ListElement { name: "ripple"; abbreviation: "XRP" }
+    ListElement { name: "sei-network"; abbreviation: "SEI" }
     ListElement { name: "shiba-inu"; abbreviation: "SHIB" }
     ListElement { name: "stellar"; abbreviation: "XLM" }
     ListElement { name: "sui"; abbreviation: "SUI" }
+    ListElement { name: "tether-gold"; abbreviation: "XAUt" }
     ListElement { name: "tron"; abbreviation: "TRX" }
+    ListElement { name: "uniswap"; abbreviation: "UNI" }
+    ListElement { name: "usd-coin"; abbreviation: "USDC" }
+    ListElement { name: "usds"; abbreviation: "USDS" }
 }
