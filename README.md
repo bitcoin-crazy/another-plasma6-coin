@@ -16,10 +16,10 @@ I am an anonymous programmer and I developed this applet for my personal utiliza
 
 The best way to install this applet is via widget manager from KDE.
 
-1. Right-Click over the toolbar and select `Add or Manage Wiggets`.
+1. Right-Click over the toolbar and select `Add or Manage Widgets`.
 2. Select `Get New` > `Download New Plasma Widgets` > `Another Plasma6 Coin`.
 3. Click Install button.
-4. Right-Click again over the toolbar and select `Add or Manage Wiggets`.
+4. Right-Click again over the toolbar and select `Add or Manage Widgets`.
 5. Select `Another Plasma6 Coin` and drag it to the toolbar.
 6. Right-Click over the applet in toolbar and select `Configure Another Plasma6 Coin`.
 
@@ -28,7 +28,7 @@ The best way to install this applet is via widget manager from KDE.
 Another way to install __Another Plasma6 Coin__ is to make it importing the tarball.
 
 1. Download the final tarball `Another.Plasma6.Coin-<version>.tar.xz`
-2. Right-Click over the toolbar and select `Add or Manage Wiggets`.
+2. Right-Click over the toolbar and select `Add or Manage Widgets`.
 3. Select `Get New` > `Install Widget From Local File`.
 4. Select the downloaded tarball.
 5. Click `Add or Manage Widgets`.
@@ -41,7 +41,7 @@ Another way to install __Another Plasma6 Coin__ is to make it manually.
 
 1. Copy the directory `Another.Plasma6.Coin` to `~/.local/share/plasma/plasmoids/`
 2. Run `$ kquitapp6 plasmashell && kstart plasmashell` or restart KDE.
-3. Right-Click over the toolbar and select `Add or Manage Wiggets`.
+3. Right-Click over the toolbar and select `Add or Manage Widgets`.
 4. Select `Another Plasma6 Coin` and drag it to the toolbar.
 5. Right-Click over the applet in toolbar and select `Configure Another Plasma6 Coin`.
 
