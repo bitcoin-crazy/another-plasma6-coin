@@ -1,4 +1,6 @@
-# Another Plasma6 Coin
+<img src="logo/AP6C-logo-alpha-border.png" width=25% height=25%>
+
+# Another Plasma6 Coin (A.P6.C)
 
 <br>![Example of toolbar](screenshots/toolbar.png)<br><br>
 <br>![Example of toolbar](screenshots/toolbar2.png)<br><br>
