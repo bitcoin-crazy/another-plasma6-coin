@@ -1,0 +1,18 @@
+
+Version 1.2.1 - 2025-04-16
+  * UNRELEASED.
+  * Documentation improvement.
+  * The last version under CoinGecko. Migrating to Binance...
+
+Version 1.2 - 2025-04-16
+  * Added 24 new coins.
+  * Improved README.md.
+  * Simplified infos on Configuration window.
+
+Version 1.1 - 2025-04-15
+  * Changed the main icon.
+  * Added instructions how to install importing a tarball
+    (present in the source code only, README.md).
+
+Version 1.0 - 2025-04-15
+  * Initial version.
