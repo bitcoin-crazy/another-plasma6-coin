@@ -18,7 +18,7 @@ ColumnLayout {
     Layout.minimumHeight: heightroot
 
     property int heightroot: 20
-    property string coinName: Plasmoid.configuration.coinNameAbbreviation
+    property string coinName: Plasmoid.configuration.coinName
     property string price: {
         let formattedPrice = getApi.price !== (-1) && !isNaN(getApi.price) ? getApi.price : -1;
         if (formattedPrice !== -1) {
@@ -54,7 +54,7 @@ Text {
     color: Kirigami.Theme.textColor
     font.bold: Plasmoid.configuration.textBold
     font.capitalization: Font.AllUppercase
-    text: Plasmoid.configuration.coinNameAbbreviation + "/" + Plasmoid.configuration.currency.toUpperCase()
+    text: Plasmoid.configuration.coinName + "/" + Plasmoid.configuration.currency.toUpperCase()
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignTop
 }

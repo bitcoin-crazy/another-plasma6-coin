@@ -27,17 +27,14 @@ Item {
         id: cryptoValue
         property var currency
         property var coinName
-        property var symbol
         property var coinNameAbbreviation
         property var showPair
     }
 
     property alias cfg_coinName: cryptoValue.coinName
     property alias cfg_currency: cryptoValue.currency
-    property alias cfg_symbol: cryptoValue.symbol
     property alias cfg_fontSize: fontsizedefault.value
     property alias cfg_textBold: boldTextCkeck.checked
-    property alias cfg_coinNameAbbreviation: cryptoValue.coinNameAbbreviation
     property alias cfg_decimalPlaces: decimalPlacesSpinBox.value
     property alias cfg_showCoinName: showCoinNameCheckBox.checked
     property alias cfg_showPair: showPairCheckBox.checked
@@ -111,7 +108,6 @@ Item {
                 model: coinModel
                 onActivated: {
                     cryptoValue.coinName = currentValue
-                    cryptoValue.coinNameAbbreviation = model.get(currentIndex).abbreviation
                 }
                 Component.onCompleted: currentIndex = indexOfValue(cryptoValue.coinName)
             }
@@ -150,7 +146,6 @@ Item {
                 model: currencyModel
                 onActivated: {
                     cryptoValue.currency = currentValue
-                    cryptoValue.symbol = currencyModel.get(currentIndex).symbol
                 }
                 Component.onCompleted: currentIndex = indexOfValue(cryptoValue.currency)
             }

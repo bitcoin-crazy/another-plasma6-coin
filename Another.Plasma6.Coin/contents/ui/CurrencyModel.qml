@@ -2,128 +2,108 @@ import QtQuick
 
 ListModel {
     ListElement {
-        name: "US Dollar"
-        abbreviation: "usd"
+        name: "US Dollar Tether"
+        abbreviation: "USDT"
         symbol: "$"
     }
     ListElement {
-        name: "bitcoin"
-        abbreviation: "btc"
+        name: "US Dollar Circle"
+        abbreviation: "USDC"
         symbol: "$"
     }
     ListElement {
-        name: "ethereum"
-        abbreviation: "eth"
+        name: "Bitcoin"
+        abbreviation: "BTC"
+        symbol: "$"
+    }
+    ListElement {
+        name: "Ethereum"
+        abbreviation: "ETH"
+        symbol: "$"
+    }
+    ListElement {
+        name: "Argentine Peso"
+        abbreviation: "ARS"
         symbol: "$"
     }
     ListElement {
         name: "Australian Dollar"
-        abbreviation: "aud"
+        abbreviation: "AUD"
         symbol: "$"
     }
     ListElement {
         name: "Brazilian Real"
-        abbreviation: "brl"
+        abbreviation: "BRL"
         symbol: "R$"
     }
     ListElement {
         name: "British Pound"
-        abbreviation: "gbp"
+        abbreviation: "GBP"
         symbol: "£"
     }
     ListElement {
-        name: "Canadian Dollar"
-        abbreviation: "cad"
+        name: "Colombian Peso"
+        abbreviation: "COP"
         symbol: "$"
     }
     ListElement {
-        name: "Chilean Peso"
-        abbreviation: "clp"
-        symbol: "$"
-    }
-    ListElement {
-        name: "Chinese Yuan"
-        abbreviation: "cny"
-        symbol: "¥"
+        name: "Czech Koruna"
+        abbreviation: "CZK"
+        symbol: "Kč"
     }
     ListElement {
         name: "Euro"
-        abbreviation: "eur"
+        abbreviation: "EUR"
         symbol: "€"
     }
     ListElement {
-        name: "Hong Kong Dollar"
-        abbreviation: "hkd"
+        name: "Indonesian Rupiah Stablecoin"
+        abbreviation: "IDRT"
         symbol: "$"
     }
     ListElement {
-        name: "Indian Rupee"
-        abbreviation: "inr"
-        symbol: "₹"
-    }
-    ListElement {
         name: "Japanese Yen"
-        abbreviation: "jpy"
+        abbreviation: "JPY"
         symbol: "¥"
     }
     ListElement {
         name: "Mexican Peso"
-        abbreviation: "mxn"
+        abbreviation: "MXN"
         symbol: "$"
     }
     ListElement {
-        name: "New Zealand Dollar"
-        abbreviation: "nzd"
+        name: "Nigerian Naira"
+        abbreviation: "NGN"
         symbol: "$"
     }
     ListElement {
-        name: "Norwegian Krone"
-        abbreviation: "nok"
-        symbol: "kr"
+        name: "Polish Zloty"
+        abbreviation: "PLN"
+        symbol: "zł"
+    }
+    ListElement {
+        name: "Romanian Leu"
+        abbreviation: "RON"
+        symbol: "₦"
     }
     ListElement {
         name: "Russian Ruble"
-        abbreviation: "rub"
+        abbreviation: "RUB"
         symbol: "₽"
     }
     ListElement {
-        name: "Salvadoran Colón"
-        abbreviation: "svc"
-        symbol: "₡"
-    }
-    ListElement {
-        name: "Singapore Dollar"
-        abbreviation: "sgd"
-        symbol: "$"
-    }
-    ListElement {
         name: "South African Rand"
-        abbreviation: "zar"
+        abbreviation: "ZAR"
         symbol: "R"
     }
     ListElement {
-        name: "South Korean Won"
-        abbreviation: "krw"
-        symbol: "₩"
-    }
-    ListElement {
-        name: "Swedish Krona"
-        abbreviation: "sek"
-        symbol: "kr"
-    }
-    ListElement {
-        name: "Thai Baht"
-        abbreviation: "thb"
-        symbol: "฿"
-    }
-    ListElement {
         name: "Turkish Lira"
-        abbreviation: "try"
+        abbreviation: "TRY"
         symbol: "₺"
     }
     ListElement {
-        name: "Venezuelan Bolívar"
-        abbreviation: "vef"
-        symbol: "Bs."
+        name: "Ukrainian Hryvnia"
+        abbreviation: "UAH"
+        symbol: "₴"
     }
 }

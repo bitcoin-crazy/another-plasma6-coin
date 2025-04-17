@@ -7,22 +7,16 @@
 
   <group name="General">
     <entry name="fontSize" type="int">
-      <default>11</default>
+      <default>15</default>
     </entry>
     <entry name="textBold" type="bool">
       <default>true</default>
     </entry>
     <entry name="coinName" type="string">
-      <default>bitcoin</default>
+      <default>BTC</default>
     </entry>
     <entry name="currency" type="string">
-      <default>usd</default>
-    </entry>
-    <entry name="symbol" type="string">
-      <default>$</default>
-    </entry>
-    <entry name="coinNameAbbreviation" type="string">
-      <default>BTC</default>
+      <default>USDT</default>
     </entry>
     <entry name="decimalPlaces" type="int">
       <default>0</default>
