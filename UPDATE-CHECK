@@ -1,0 +1,6 @@
+- Clean the source code (commenting Debugs, etc).
+- Update README.md if needed.
+- Update ChangeLog at GitHub.
+- Change version at metadata.json
+- Upload tarball to GitHub and KDE Store.
+- Update ChangeLog on Kde Store.
