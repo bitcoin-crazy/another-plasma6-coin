@@ -5,7 +5,7 @@ Item {
     property string currencyAbbreviation: ""
     property int decimalPlaces: 2
     property int refreshRate: 3 // Refresh rate in minutes
-    property var price: -1
+    property var price: null // Set no initial price
     property bool inErrorState: false
 
     onCoinNameChanged: updatePrice()
@@ -27,15 +27,22 @@ Item {
             if (req.readyState !== 4) return;
 
             if (req.status === 200) {
-                const data = JSON.parse(req.responseText);
-                price = parseFloat(data.price);
-                inErrorState = false;
+                try {
+                    const data = JSON.parse(req.responseText);
+                    price = parseFloat(data.price); // Parse and store the price
+                    inErrorState = false;
+                } catch (e) {
+                    console.error("AP6C: Error parsing API response:", e);
+                    price = "E"; // Use 'E' to indicate error
+                    inErrorState = true;
+                    retry.start(); // Retry if parsing fails
+                }
             } else {
-                console.error(`AP6C: Query error: ${req.status}`);
-                price = "E";
+                console.error(`AP6C: Query failed with status: ${req.status}`);
+                price = "E"; // Use 'E' to indicate HTTP error
                 inErrorState = true;
+                retry.start(); // Retry on error
             }
-            retry.start(); // Retry if there's an error or after successful fetch
         };
 
         req.send();

@@ -26,11 +26,12 @@ ColumnLayout {
         currencyAbbreviation: Plasmoid.configuration.currency
     }
 
+    // Determines which price text should be shown
     property string displayedPrice: {
         if (getApi.price === "E") {
             return "Err";
         }
-        if (getApi.price !== -1 && !isNaN(getApi.price)) {
+        if (getApi.price !== null && !isNaN(getApi.price)) {
             return getApi.price.toFixed(Plasmoid.configuration.decimalPlaces);
         }
         return "?";
@@ -67,7 +68,6 @@ ColumnLayout {
         width: wrapper.width
         font.pixelSize: pixelFontVar
         color: displayedPrice === "Err" ? "red" : Kirigami.Theme.textColor
-        //color: Kirigami.Theme.textColor
         font.bold: Plasmoid.configuration.textBold
         font.capitalization: Font.AllUppercase
         text: displayedPrice
