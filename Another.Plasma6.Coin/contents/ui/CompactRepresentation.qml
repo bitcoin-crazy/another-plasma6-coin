@@ -66,7 +66,8 @@ ColumnLayout {
         id: priceText
         width: wrapper.width
         font.pixelSize: pixelFontVar
-        color: Kirigami.Theme.textColor
+        color: displayedPrice === "Err" ? "red" : Kirigami.Theme.textColor
+        //color: Kirigami.Theme.textColor
         font.bold: Plasmoid.configuration.textBold
         font.capitalization: Font.AllUppercase
         text: displayedPrice
