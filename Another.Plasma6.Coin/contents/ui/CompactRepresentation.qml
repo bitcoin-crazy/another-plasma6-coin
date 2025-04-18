@@ -6,6 +6,7 @@
  */
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.12
 import org.kde.plasma.plasmoid
 import org.kde.kirigami as Kirigami
 import "components" as Components
@@ -75,6 +76,13 @@ ColumnLayout {
         verticalAlignment: Text.AlignTop
         wrapMode: Text.WordWrap
         height: 30
+    }
+
+    MouseArea {
+        anchors.fill: priceText
+        onClicked: {
+            getApi.updatePrice(); // Update price when clicking
+        }
     }
 
     spacing: 0
