@@ -12,25 +12,28 @@ import "components" as Components
 
 ColumnLayout {
     id: wrapper
+
     property int pixelFontVar: Plasmoid.configuration.fontSize
     property int pixelFontVar2: pixelFontVar * 0.7
+    property int heightroot: 20
+
     Layout.minimumWidth: coinNameText.implicitWidth + pixelFontVar * 4
     Layout.minimumHeight: heightroot
-
-    property int heightroot: 20
-    property string coinName: Plasmoid.configuration.coinName
-    property string price: {
-        let formattedPrice = getApi.price !== (-1) && !isNaN(getApi.price) ? getApi.price : -1;
-        if (formattedPrice !== -1) {
-            return formattedPrice.toFixed(Plasmoid.configuration.decimalPlaces);
-        }
-        return "?";
-    }
 
     Components.GetAPI {
         id: getApi
         coinName: Plasmoid.configuration.coinName
         currencyAbbreviation: Plasmoid.configuration.currency
+    }
+
+    property string displayedPrice: {
+        if (getApi.price === "E") {
+            return "Err";
+        }
+        if (getApi.price !== -1 && !isNaN(getApi.price)) {
+            return getApi.price.toFixed(Plasmoid.configuration.decimalPlaces);
+        }
+        return "?";
     }
 
     Text {
@@ -41,23 +44,23 @@ ColumnLayout {
         color: Kirigami.Theme.textColor
         font.bold: Plasmoid.configuration.textBold
         font.capitalization: Font.AllUppercase
-        text: coinName
+        text: Plasmoid.configuration.coinName
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignTop
     }
 
-Text {
-    id: coinPairText
-    visible: Plasmoid.configuration.showPair
-    width: wrapper.width
-    font.pixelSize: pixelFontVar2
-    color: Kirigami.Theme.textColor
-    font.bold: Plasmoid.configuration.textBold
-    font.capitalization: Font.AllUppercase
-    text: Plasmoid.configuration.coinName + "/" + Plasmoid.configuration.currency.toUpperCase()
-    horizontalAlignment: Text.AlignHCenter
-    verticalAlignment: Text.AlignTop
-}
+    Text {
+        id: coinPairText
+        visible: Plasmoid.configuration.showPair
+        width: wrapper.width
+        font.pixelSize: pixelFontVar2
+        color: Kirigami.Theme.textColor
+        font.bold: Plasmoid.configuration.textBold
+        font.capitalization: Font.AllUppercase
+        text: Plasmoid.configuration.coinName + "/" + Plasmoid.configuration.currency.toUpperCase()
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignTop
+    }
 
     Text {
         id: priceText
@@ -66,7 +69,7 @@ Text {
         color: Kirigami.Theme.textColor
         font.bold: Plasmoid.configuration.textBold
         font.capitalization: Font.AllUppercase
-        text: price
+        text: displayedPrice
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignTop
         wrapMode: Text.WordWrap
