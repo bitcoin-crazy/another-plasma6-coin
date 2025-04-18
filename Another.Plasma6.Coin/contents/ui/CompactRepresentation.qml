@@ -82,7 +82,18 @@ ColumnLayout {
         anchors.fill: priceText
         onClicked: {
             getApi.updatePrice(); // Update price when clicking
+            priceFlash.start();   // Trigger visual feedback
         }
+    }
+
+    // Simple color animation for visual feedback
+    ColorAnimation {
+        id: priceFlash
+        target: priceText
+        property: "color"
+        from: Kirigami.Theme.highlightColor
+        to: displayedPrice === "Err" ? "red" : Kirigami.Theme.textColor
+        duration: 250
     }
 
     spacing: 0
