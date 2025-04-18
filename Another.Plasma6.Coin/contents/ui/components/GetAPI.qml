@@ -16,20 +16,10 @@ Item {
             return;
 
         const url = "https://api.binance.com/api/v3/ticker/price?symbol=" + coinName + currencyAbbreviation;
-
-        updateAPI(url, function(result) {
-            if (result === "E" || result === null) {
-                price = "E";
-                inErrorState = true;
-                retry.start();
-            } else {
-                price = parseFloat(result);
-                inErrorState = false;
-            }
-        });
+        updateAPI(url);
     }
 
-    function updateAPI(url, callback) {
+    function updateAPI(url) {
         const req = new XMLHttpRequest();
         req.open("GET", url, true);
 
@@ -38,14 +28,14 @@ Item {
 
             if (req.status === 200) {
                 const data = JSON.parse(req.responseText);
-                callback(data.price);
-            } else if (req.status === 400) {
-                console.log("AP6C: Error 400");
-                callback("E");
+                price = parseFloat(data.price);
+                inErrorState = false;
             } else {
                 console.error(`AP6C: Query error: ${req.status}`);
-                callback(null);
+                price = "E";
+                inErrorState = true;
             }
+            retry.start(); // Retry if there's an error or after successful fetch
         };
 
         req.send();
