@@ -68,7 +68,7 @@ ColumnLayout {
         id: priceText
         width: wrapper.width
         font.pixelSize: pixelFontVar
-        color: displayedPrice === "Err" ? "red" : Kirigami.Theme.textColor
+        color: displayedPrice === "Err" ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
         font.bold: Plasmoid.configuration.textBold
         font.capitalization: Font.AllUppercase
         text: displayedPrice
@@ -92,7 +92,7 @@ ColumnLayout {
         target: priceText
         property: "color"
         from: Kirigami.Theme.highlightColor
-        to: displayedPrice === "Err" ? "red" : Kirigami.Theme.textColor
+        to: displayedPrice === "Err" ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
         duration: 250
     }
 
