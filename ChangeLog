@@ -1,3 +1,13 @@
+Version 2.0 - 2025-04-19
+  * Migrated from CoinGecko API to Binance API.
+      -  Binance API is faster than CoinGecko API.
+      -  Binance API has less limitations. It is possible to access several
+         pairs of coins at the same time.
+      -  In April 18, 2025, CoinGecko API was providing 100 coins under USD,
+         while Binance had 573 under USDT.
+  * Added 36 new coins and 10 new currencies.
+  * Returning 'Err' on errors, in the price area.
+  * Updating the price when clicking over it.
 
 Version 1.2.1 - 2025-04-16
   * UNRELEASED.
