@@ -43,7 +43,12 @@ ColumnLayout {
         visible: Plasmoid.configuration.showCoinName
         width: wrapper.width
         font.pixelSize: pixelFontVar2
-        color: Kirigami.Theme.textColor
+        color: {
+            if (displayedPrice === "Err") {
+                return Plasmoid.configuration.errorColor || Kirigami.Theme.negativeTextColor;
+            }
+            return Plasmoid.configuration.textColor || Kirigami.Theme.textColor;
+        }
         font.bold: Plasmoid.configuration.textBold
         font.capitalization: Font.AllUppercase
         text: Plasmoid.configuration.coinName
@@ -56,7 +61,12 @@ ColumnLayout {
         visible: Plasmoid.configuration.showPair
         width: wrapper.width
         font.pixelSize: pixelFontVar2
-        color: Kirigami.Theme.textColor
+        color: {
+            if (displayedPrice === "Err") {
+                return Plasmoid.configuration.errorColor || Kirigami.Theme.negativeTextColor;
+            }
+            return Plasmoid.configuration.textColor || Kirigami.Theme.textColor;
+        }
         font.bold: Plasmoid.configuration.textBold
         font.capitalization: Font.AllUppercase
         text: Plasmoid.configuration.coinName + "/" + Plasmoid.configuration.currency.toUpperCase()
@@ -68,7 +78,12 @@ ColumnLayout {
         id: priceText
         width: wrapper.width
         font.pixelSize: pixelFontVar
-        color: displayedPrice === "Err" ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
+        color: {
+            if (displayedPrice === "Err") {
+                return Plasmoid.configuration.errorColor || Kirigami.Theme.negativeTextColor;
+            }
+            return Plasmoid.configuration.textColor || Kirigami.Theme.textColor;
+        }
         font.bold: Plasmoid.configuration.textBold
         font.capitalization: Font.AllUppercase
         text: displayedPrice
@@ -92,7 +107,12 @@ ColumnLayout {
         target: priceText
         property: "color"
         from: Kirigami.Theme.highlightColor
-        to: displayedPrice === "Err" ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
+        to: {
+            if (displayedPrice === "Err") {
+                return Plasmoid.configuration.errorColor || Kirigami.Theme.negativeTextColor;
+            }
+            return Plasmoid.configuration.textColor || Kirigami.Theme.textColor;
+        }
         duration: 250
     }
 
