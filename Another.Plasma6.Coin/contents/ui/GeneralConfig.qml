@@ -35,9 +35,10 @@ Item {
     property alias cfg_currency: cryptoValue.currency
     property alias cfg_fontSize: fontsizedefault.value
     property alias cfg_textBold: boldTextCkeck.checked
-    property alias cfg_decimalPlaces: decimalPlacesSpinBox.value
     property alias cfg_showCoinName: showCoinNameCheckBox.checked
     property alias cfg_showPair: showPairCheckBox.checked
+    property alias cfg_decimalPlaces: decimalPlacesSpinBox.value
+    property alias cfg_textColor: textColorField.text
 
     ColumnLayout {
         Layout.preferredWidth: parent.width - Kirigami.Units.largeSpacing * 2
@@ -199,6 +200,40 @@ Item {
                 value: 2
                 stepSize: 1
                 onValueChanged: configurationChanged()
+            }
+
+            // Choose color
+            Item {
+                Layout.minimumWidth: root.width / 2
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                RowLayout {
+                    anchors.fill: parent
+                    spacing: 2
+
+                    Label {
+                        text: i18n("Text Color (empty=default):")
+                        horizontalAlignment: Label.AlignRight
+                        verticalAlignment: Label.AlignVCenter
+                        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+                        Layout.fillWidth: true
+                    }
+                    ToolButton {
+                        icon.name: "help-about"
+                        implicitWidth: Kirigami.Units.iconSizes.small
+                        implicitHeight: Kirigami.Units.iconSizes.small
+                        ToolTip.visible: hovered
+                        ToolTip.text: i18n("Use color names (red, yellowgreen) or HEX code (#ffff00 for yellow). Leave empty to use the theme's default color.")
+                        hoverEnabled: true
+                        Layout.alignment: Qt.AlignVCenter
+                    }
+                }
+            }
+            TextField {
+                id: textColorField
+                text: Plasmoid.configuration.textColor || ""
+                placeholderText: i18n("Name color or HEX (#RRGGBB)")
+                onTextChanged: configRoot.configurationChanged()
             }
         }
     }
