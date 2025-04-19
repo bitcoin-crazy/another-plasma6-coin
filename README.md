@@ -14,6 +14,31 @@ I am an anonymous programmer and I developed this applet for my personal utiliza
 > [!NOTE]
 > This applet is available at [KDE Store](https://store.kde.org/p/2280323).
 
+## How this applet works
+
+A.P6.C gets prices from [Binance API](https://github.com/binance/binance-spot-api-docs), since version 2.0. Older versions were using [CoinGecko API](https://docs.coingecko.com/reference/introduction).
+
+Binance API x CoinGecko API:
+
+* Binance API is faster than CoinGecko API.
+* Binance API has less limitations. You can access several pairs of coins at the same time.
+* In April 18, 2025, CoinGecko API was providing 100 coins under USD[1], while Binance had 573 under USDT[2].
+
+```
+[1] $ curl -s 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd' | tr ',' '\n' | grep '"id":' | wc -l
+[2] $ curl -s https://api.binance.com/api/v3/ticker/price | tr '{' '\n' | egrep '[A-Z]USDT' | wc -l
+```
+
+If you are interested in CoinGecko, see the branch `ap6c-1.2.1-coingecko-archived` on this Git repository.
+
+This applet will show the price of coins in toolbar and it has the following resources and features:
+
+* Update of prices every 3 minutes.
+* Retry after 1 minute if the last call fails.
+* Immediate update of a price when clicking over it.
+* Possibility to use decimal places.
+* Possibility to show the name of the coin, or the name of coin and the currency, or none.
+* The `ERR` (Error) message will be shown when a wrong pair of coins is selected or when occurs other error.
 
 ## How to install
 
@@ -61,7 +86,6 @@ There are some options in `Configuration` window.
 * `From Crypto` will select the cryptocurrency and `To Crypto/Currency` will select the pair to be utilized.
 * `Show Coin Name` and `Show Pair`: only one of these can be selected, but both can be unselected.
 * `Decimal Places` is for fractional numbers.
-* The price will be updated every 3 minutes.
 
 ## Hacking the source code
 
@@ -70,53 +94,49 @@ There are some options in `Configuration` window.
 __Another Plasma6 Coin__ arrives with a limited number of coins and currencies. It is possible to add new items.
 
 > [!IMPORTANT]
-> All prices are taken from [CoinGecko](https://www.coingecko.com) via API, so is needed to use the same names from CoinGecko for currencies.
+> All prices are taken from [Binance](https://www.binance.com) via API, so is needed to use the same names from Binance.
 
 * For coins:
   * Edit `~/.local/share/plasma/plasmoids/Another.Plasma6.Coin/contents/ui/CoinModel.qml` and add a new entry.
-  * You must use the same `name` provided by CoinGecko via API. See __TIP1__ below.
+  * You must use the same `name` provided by Binance via API. See __TIP1__ below.
   * Example of an entry to be added:
     ```
-    ListElement { name: "solana"; abbreviation: "SOL" }
+    ListElement { name: "SOL" }
     ```
-  * In the last example, `solana` is the name to be used to call the CoinGecko API and `SOL` is the ticker (symbol) to be shown in the KDE toolbar.
+  * In the last example, `SOL` is the name to be used to call the Binance API.
   * It is not needed to restart KDE after adding new coins.
 
 * For currencies:
-  * Edit `~/.local/share/plasma/plasmoids/Another.Plasma6.Coin/contents/ui/CurrencyModel.qml` and add a new block.
-  * There is a list of currencies [here](https://docs.coingecko.com/reference/simple-supported-currencies). See __TIP2__ below.
-  * Example of a block:
-  ```
-  ListElement {
-      name: "US Dollar"
-      abbreviation: "usd"
-      symbol: "$"
-  }
-  ```
-  * In the last example, `US Dollar` is a name to visual identification of the currency in configuration block. `usd` will be used to call the CoinGecko API and to compose the pair name in the KDE toolbar. Currently, the `symbol` is not used.
+  * Edit `~/.local/share/plasma/plasmoids/Another.Plasma6.Coin/contents/ui/CurrencyModel.qml` and add a new line.
+  * You must use the same `abbreviation` provided by Binance via API. See __TIP1__ below.
+  * Example of a line:
+    ```
+    ListElement { name: "British Pound" ; abbreviation: "GBP" }
+    ```
+  * In the last example, `British Pound` is a name to visual identification of the currency in configuration block. `GBP` will be used to call the Binance API and to compose the pair name in the KDE toolbar.
   * It is not needed to restart KDE after adding new currencies.
 
-__TIP1:__ The CoinGecko API provides a restricted number of coins. It is possible to get a list using the  `curl` command.
+__TIP1:__ The Binance API provides a restricted number of coins. It is possible to get a list using the  `curl` command.
 
-```
-$ curl -s 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd' | tr ',' '\n' | grep '"id":'
-```
+  ```
+  $ curl -s https://api.binance.com/api/v3/ticker/price | tr '{' '\n' | egrep '[A-Z]USDT'
+  ```
 
-If you receive a blank result (error 429 from CoinGecko), wait for 10 seconds and try again.
+In the last example, the prices were filtered to show USDT pairs only. Remove `| egrep '[A-Z]USDT'` to see all available pairs.
 
-It is also possible to get a list of available currencies.
+It is also possible to get a list of available currencies for BTC and USDT:
 
-```
-$ curl -s 'https://api.coingecko.com/api/v3/simple/supported_vs_currencies' | tr ',' '\n' | tr -d '[]"'
-```
+  ```
+  $ curl -s https://api.binance.com/api/v3/ticker/price | tr '{' '\n' | egrep '"(BTC|USDT)' | sort
+  ```
 
-__TIP2:__ It is possible to make tests against the CoinGecko API using the `curl` command. See an example for BTC/USD:
+__TIP2:__ It is possible to make tests against the Binance API using the `curl` command. See an example for BTC/USDT:
 
-```
-$ curl 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd'
-```
+  ```
+  $ curl -s https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT
+  ```
 
-In the last command, if you receive the error 429, wait for 5 seconds and try again. An empty reply "`{}`" mains the coin price is not available via FREE API or the coin/currency name was wrong typed.
+The errors from Binance API are very comprehensive.
 
 ### Crypto/Currency names size
 
@@ -127,9 +147,4 @@ The size of the Crypto/Currency names is 70% (0.7) of the price size. This can b
 The time refresh for prices is 3 minutes. This can be changed at `~/.local/share/plasma/plasmoids/Another.Plasma6.Coin/contents/ui/components/GetAPI.qml`. Search for `refreshRate: 3`.
 
 > [!IMPORTANT]
-> Avoid using less than 3 minutes because CoinGecko can dislike this.
-
-## Limitations
-
-* CoinGecko discards intensive calls. I recommend do not use more than 5 widgets at the same time to avoid lose prices or to be blocked.
-* CoinGecko free API is a bit limited and it doesn't make available all possible coins. See the __TIP1:__ above.
+> Avoid using less than 1 minute because Binance API can dislike this.
