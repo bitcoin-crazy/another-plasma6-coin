@@ -113,7 +113,7 @@ ColumnLayout {
             }
             return Plasmoid.configuration.textColor || Kirigami.Theme.textColor;
         }
-        duration: 250
+        duration: 1000
     }
 
     spacing: 0
