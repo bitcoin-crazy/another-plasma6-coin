@@ -1,3 +1,6 @@
+Version 2.1 - 2025-04-21
+  * Implemented colors. Now, users can apply color to prices.
+
 Version 2.0 - 2025-04-19
   * Migrated from CoinGecko API to Binance API.
       -  Binance API is faster than CoinGecko API.
@@ -9,7 +12,7 @@ Version 2.0 - 2025-04-19
 
 Version 1.2.1 - 2025-04-16
   * UNRELEASED.
-  * Documentation improvement.
+  * Improved documentation.
   * The last version under CoinGecko. Migrating to Binance...
 
 Version 1.2 - 2025-04-16
