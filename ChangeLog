@@ -1,6 +1,7 @@
 Version 2.1 - 2025-04-21
   * Increased delay of the click price update.
   * Implemented colors. Now, users can apply color to prices.
+  * Updated README.md.
 
 Version 2.0 - 2025-04-19
   * Migrated from CoinGecko API to Binance API.
