@@ -4,6 +4,7 @@
 
 <br>![Example of toolbar](screenshots/toolbar.png)<br><br>
 <br>![Example of toolbar](screenshots/toolbar2.png)<br><br>
+<br>![Example of toolbar](screenshots/toolbar3.png)<br><br>
 
 __Another Plasma6 Coin__ is a Plasma 6 (KDE) applet to show the price of Bitcoin and other cryptocurrencies in KDE toolbar.
 
