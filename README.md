@@ -30,7 +30,7 @@ Binance API x CoinGecko API:
 [2] $ curl -s https://api.binance.com/api/v3/ticker/price | tr '{' '\n' | egrep '[A-Z]USDT' | wc -l
 ```
 
-If you are interested in CoinGecko, see the branch `ap6c-1.2.1-coingecko-archived` on this Git repository.
+If you are interested in CoinGecko, see the branch [`ap6c-1.2.1-coingecko-archived`](https://github.com/bitcoin-crazy/another-plasma6-coin/tree/ap6c-1.2.1-coingecko-archived) on this Git repository or download the [version 1.2](https://github.com/bitcoin-crazy/another-plasma6-coin/releases/tag/v1.2).
 
 This applet will show the price of coins in toolbar and it has the following resources and features:
 
@@ -39,6 +39,7 @@ This applet will show the price of coins in toolbar and it has the following res
 * Immediate update of a price when clicking over it.
 * Possibility to use decimal places.
 * Possibility to show the name of the coin, or the name of coin and the currency, or none.
+* Possibility to apply colors to prices.
 * The `ERR` (Error) message will be shown when a wrong pair of coins is selected or when occurs other error.
 
 ## How to install
@@ -87,6 +88,7 @@ There are some options in `Configuration` window.
 * `From Crypto` will select the cryptocurrency and `To Crypto/Currency` will select the pair to be utilized.
 * `Show Coin Name` and `Show Pair`: only one of these can be selected, but both can be unselected.
 * `Decimal Places` is for fractional numbers.
+* `Text Color` allows the user to choose a color for the price. If empty, the default theme color will be shown. It is possible to use a color name (like `yellow`, `yellowgreen`) or a hex color code (like `#00ff00` or `#00FF00`). The character "`#`" is mandatory for hex colors.
 
 ## Hacking the source code
 
@@ -137,7 +139,7 @@ __TIP2:__ It is possible to make tests against the Binance API using the `curl` 
   $ curl -s https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT
   ```
 
-The errors from Binance API are very comprehensive.
+The errors from Binance API are very comprehensive. Read carefully each message returned at the shell prompt.
 
 ### Crypto/Currency names size
 
