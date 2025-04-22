@@ -2,8 +2,12 @@
 - Verify all comment in the code.
 - Update README.md if needed.
 - Update ChangeLog at GitHub.
+- Update copyright date.
+- Verify commits author (name and email).
 - Change version at metadata.json
 - Release on GitHub.
-- Upload tarball (tar.xz) to GitHub and KDE Store.
+- Upload tarball (tar.xz) to:
+    ~ GitHub
+    ~ KDE Store
 - Update ChangeLog on KDE Store.
 - Update Version no KDE Store (Edit).
