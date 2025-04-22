@@ -88,7 +88,7 @@ There are some options in `Configuration` window.
 * `From Crypto` will select the cryptocurrency and `To Crypto/Currency` will select the pair to be utilized.
 * `Show Coin Name` and `Show Pair`: only one of these can be selected, but both can be unselected.
 * `Decimal Places` is for fractional numbers.
-* `Text Color` allows the user to choose a color for the price. If empty, the default theme color will be shown. It is possible to use a color name (like `yellow`, `yellowgreen`) or a hex color code (like `#00ff00` or `#00FF00`). The character "`#`" is mandatory for hex colors.
+* `Text Color` allows the user to choose a color for the price. If empty, the default theme color will be shown. It is possible to use a color name (like `yellow`, `yellowgreen`) or a hex color code (like `#00ff00` or `#00FF00`). The character "`#`" is mandatory for hex colors. There is a color name table available [here](https://doc.qt.io/qt-6/qml-color.html#svg-color-reference). To choose a hex color, use the KColorChooser program, available on KDE Plasma 6.
 
 ## Hacking the source code
 
