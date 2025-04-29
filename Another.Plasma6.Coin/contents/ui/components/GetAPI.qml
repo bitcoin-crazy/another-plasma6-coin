@@ -4,7 +4,7 @@ Item {
     property string coinName: ""
     property string currencyAbbreviation: ""
     property int decimalPlaces: 2
-    property int refreshRate: 3 // Refresh rate in minutes
+    property int refreshRate: Plasmoid.configuration.timeRefresh || 3 // Refresh rate in minutes, linked to config
     property var price: null // Set no initial price
     property bool inErrorState: false
 

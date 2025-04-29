@@ -30,6 +30,9 @@
     <entry name="textColor" type="string">
       <default></default>
     </entry>
+    <entry name="timeRefresh" type="int">
+      <default>3</default>
+    </entry>
   </group>
 
 </kcfg>

@@ -4,7 +4,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  * SPDX-SnippetComment: Another Plasma6 Coin was initially based on Plasma Coin 1.0.2, from zayronxio.
  */
-
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts 1.11
@@ -39,6 +38,7 @@ Item {
     property alias cfg_showPair: showPairCheckBox.checked
     property alias cfg_decimalPlaces: decimalPlacesSpinBox.value
     property alias cfg_textColor: textColorField.text
+    property alias cfg_timeRefresh: timeRefreshSpinBox.value
 
     ColumnLayout {
         Layout.preferredWidth: parent.width - Kirigami.Units.largeSpacing * 2
@@ -223,7 +223,7 @@ Item {
                         implicitWidth: Kirigami.Units.iconSizes.small
                         implicitHeight: Kirigami.Units.iconSizes.small
                         ToolTip.visible: hovered
-                        ToolTip.text: i18n("Use color names (red, yellowgreen) or HEX code (#ffff00 for yellow). Leave empty to use the theme's default color.")
+                        ToolTip.text: i18n("Use color names (red, yellowgreen) or HEX code (#ffff00 for yellow). Leave empty to use the theme's default color. Tips in README at https://github.com/bitcoin-crazy/another-plasma6-coin")
                         hoverEnabled: true
                         Layout.alignment: Qt.AlignVCenter
                     }
@@ -234,6 +234,42 @@ Item {
                 text: Plasmoid.configuration.textColor || ""
                 placeholderText: i18n("Name color or HEX (#RRGGBB)")
                 onTextChanged: configRoot.configurationChanged()
+            }
+
+            // Time refresh with tooltip
+            Item {
+                Layout.minimumWidth: root.width / 2
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                RowLayout {
+                    anchors.fill: parent
+                    spacing: 2
+
+                    Label {
+                        text: i18n("Time Refresh (minutes):")
+                        horizontalAlignment: Label.AlignRight
+                        verticalAlignment: Label.AlignVCenter
+                        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+                        Layout.fillWidth: true
+                    }
+                    ToolButton {
+                        icon.name: "help-about"
+                        implicitWidth: Kirigami.Units.iconSizes.small
+                        implicitHeight: Kirigami.Units.iconSizes.small
+                        ToolTip.visible: hovered
+                        ToolTip.text: i18n("Minutes to refresh the coin value. Valid range: 1–60.")
+                        hoverEnabled: true
+                        Layout.alignment: Qt.AlignVCenter
+                    }
+                }
+            }
+            SpinBox {
+                id: timeRefreshSpinBox
+                from: 1
+                to: 60
+                value: 3
+                stepSize: 1
+                onValueChanged: configRoot.configurationChanged()
             }
         }
     }

@@ -25,6 +25,7 @@ ColumnLayout {
         id: getApi
         coinName: Plasmoid.configuration.coinName
         currencyAbbreviation: Plasmoid.configuration.currency
+        refreshRate: Plasmoid.configuration.timeRefresh || 3 // Integrating the refresh rate configuration
     }
 
     // Determines which price text should be shown
@@ -114,6 +115,14 @@ ColumnLayout {
             return Plasmoid.configuration.textColor || Kirigami.Theme.textColor;
         }
         duration: 1000
+    }
+
+    Timer {
+        id: autoUpdateTimer
+        interval: Plasmoid.configuration.timeRefresh * 60000 // Convert from minutes to milliseconds
+        repeat: true
+        running: true
+        onTriggered: getApi.updatePrice() // Trigger price update based on configured interval
     }
 
     spacing: 0
