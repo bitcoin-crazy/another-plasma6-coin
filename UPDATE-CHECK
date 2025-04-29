@@ -4,7 +4,9 @@
 - Update ChangeLog at GitHub.
 - Update copyright date.
 - Verify commits author (name and email).
-- Change version at metadata.json
+- Change version at:
+    ~ Metadata.json
+    ~ GeneralConfig.qml
 - Release on GitHub.
 - Upload tarball (tar.xz) to:
     ~ GitHub

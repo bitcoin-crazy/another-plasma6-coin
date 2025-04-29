@@ -310,5 +310,17 @@ Item {
             }
 
         }
+
+        // Applet version
+        Item {
+            Layout.fillWidth: true
+            Layout.preferredHeight: Kirigami.Units.largeSpacing * 2
+        }
+
+        Label {
+            text: "     Another Plasma6 Coin, version: 2.2"
+            horizontalAlignment: Label.AlignCenter
+            Layout.fillWidth: true
+        }
     }
 }
