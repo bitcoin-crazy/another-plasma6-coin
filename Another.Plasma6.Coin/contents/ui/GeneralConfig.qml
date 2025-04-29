@@ -39,6 +39,7 @@ Item {
     property alias cfg_decimalPlaces: decimalPlacesSpinBox.value
     property alias cfg_textColor: textColorField.text
     property alias cfg_timeRefresh: timeRefreshSpinBox.value
+    property alias cfg_blinkRefresh: blinkRefreshCheckBox.checked
 
     ColumnLayout {
         Layout.preferredWidth: parent.width - Kirigami.Units.largeSpacing * 2
@@ -271,6 +272,43 @@ Item {
                 stepSize: 1
                 onValueChanged: configRoot.configurationChanged()
             }
+
+            // Blink Refresh checkbox with tooltip
+            Item {
+                Layout.minimumWidth: root.width / 2
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                RowLayout {
+                    anchors.fill: parent
+                    spacing: 2
+
+                    Label {
+                        text: i18n("Blink Refresh:")
+                        horizontalAlignment: Label.AlignRight
+                        verticalAlignment: Label.AlignVCenter
+                        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+                        Layout.fillWidth: true
+                    }
+                    ToolButton {
+                        icon.name: "help-about"
+                        implicitWidth: Kirigami.Units.iconSizes.small
+                        implicitHeight: Kirigami.Units.iconSizes.small
+                        ToolTip.visible: hovered
+                        ToolTip.text: i18n("Blink the price when it refreshes.")
+                        hoverEnabled: true
+                        Layout.alignment: Qt.AlignVCenter
+                    }
+                }
+            }
+            CheckBox {
+                id: blinkRefreshCheckBox
+                text: i18n("")
+                checked: false
+                onCheckedChanged: {
+                    configurationChanged()
+                }
+            }
+
         }
     }
 }

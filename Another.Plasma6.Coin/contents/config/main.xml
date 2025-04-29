@@ -33,6 +33,9 @@
     <entry name="timeRefresh" type="int">
       <default>3</default>
     </entry>
+    <entry name="blinkRefresh" type="bool">
+      <default>false</default>
+    </entry>
   </group>
 
 </kcfg>

@@ -92,13 +92,20 @@ ColumnLayout {
         verticalAlignment: Text.AlignTop
         wrapMode: Text.WordWrap
         height: 30
+        opacity: 1.0
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 1000
+            }
+        }
     }
 
     MouseArea {
         anchors.fill: priceText
         onClicked: {
             getApi.updatePrice(); // Update price when clicking
-            priceFlash.start();   // Trigger visual feedback
+                fadeAnimation.start();
         }
     }
 
@@ -117,12 +124,24 @@ ColumnLayout {
         duration: 1000
     }
 
+    SequentialAnimation {
+        id: fadeAnimation
+        running: false
+        PropertyAnimation { target: priceText; property: "opacity"; to: 0.0; duration: 500 }
+        PropertyAnimation { target: priceText; property: "opacity"; to: 1.0; duration: 500 }
+    }
+
     Timer {
         id: autoUpdateTimer
         interval: Plasmoid.configuration.timeRefresh * 60000 // Convert from minutes to milliseconds
         repeat: true
         running: true
-        onTriggered: getApi.updatePrice() // Trigger price update based on configured interval
+        onTriggered: {
+            getApi.updatePrice(); // Trigger price update based on configured interval
+            if (Plasmoid.configuration.blinkRefresh) {
+                fadeAnimation.start();
+            }
+        }
     }
 
     spacing: 0
