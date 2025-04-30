@@ -34,7 +34,7 @@ If you are interested in CoinGecko, see the branch [`ap6c-1.2.1-coingecko-archiv
 
 This applet will show the price of coins in toolbar and it has the following resources and features:
 
-* Update of prices every 3 minutes.
+* Update of prices every "x" minutes, where "x" is a number between 1 and 60.
 * Retry after 1 minute if the last call fails.
 * Immediate update of a price when clicking over it.
 * Possibility to use decimal places.
@@ -89,6 +89,8 @@ There are some options in `Configuration` window.
 * `Show Coin Name` and `Show Pair`: only one of these can be selected, but both can be unselected.
 * `Decimal Places` is for fractional numbers.
 * `Text Color` allows the user to choose a color for the price. If empty, the default theme color will be shown. It is possible to use a color name (like `yellow`, `yellowgreen`) or a hex color code (like `#00ff00` or `#00FF00`). The character "`#`" is mandatory for hex colors. There is a color name table available [here](https://doc.qt.io/qt-6/qml-color.html#svg-color-reference). To choose a hex color, use the KColorChooser program, available on KDE Plasma 6.
+* `Time Refresh` sets the time in minutes to auto-refresh the price. This is a value between 1 and 60.
+* `Blink Refresh` defines if the price will blink when refreshing (automatically or via click).
 
 ## Hacking the source code
 
@@ -144,10 +146,3 @@ The errors from Binance API are very comprehensive. Read carefully each message 
 ### Crypto/Currency names size
 
 The size of the Crypto/Currency names is 70% (0.7) of the price size. This can be changed at `~/.local/share/plasma/plasmoids/Another.Plasma6.Coin/contents/ui/CompactRepresentation.qml`. Search for `0.7`.
-
-### Time refresh
-
-The time refresh for prices is 3 minutes. This can be changed at `~/.local/share/plasma/plasmoids/Another.Plasma6.Coin/contents/ui/components/GetAPI.qml`. Search for `refreshRate: 3`.
-
-> [!IMPORTANT]
-> Avoid using less than 1 minute because Binance API can dislike this.
