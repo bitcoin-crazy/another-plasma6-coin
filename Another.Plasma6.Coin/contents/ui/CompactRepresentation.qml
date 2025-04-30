@@ -28,13 +28,16 @@ ColumnLayout {
         refreshRate: Plasmoid.configuration.timeRefresh || 3 // Integrating the refresh rate configuration
     }
 
-    // Determines which price text should be shown
+    // Determine which price text should be shown with multiplier applied
     property string displayedPrice: {
         if (getApi.price === "E") {
             return "Err";
         }
         if (getApi.price !== null && !isNaN(getApi.price)) {
-            return getApi.price.toFixed(Plasmoid.configuration.decimalPlaces);
+            // Apply price multiplier from configuration
+            var price = parseFloat(getApi.price);
+            var multiplier = Plasmoid.configuration.priceMultiplier || 1; // Default to 1 if multiplier is not set
+            return (price * multiplier).toFixed(Plasmoid.configuration.decimalPlaces);
         }
         return "?";
     }
@@ -105,7 +108,7 @@ ColumnLayout {
         anchors.fill: priceText
         onClicked: {
             getApi.updatePrice(); // Update price when clicking
-                fadeAnimation.start();
+            fadeAnimation.start();
         }
     }
 

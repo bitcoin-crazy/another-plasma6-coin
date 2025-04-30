@@ -37,6 +37,7 @@ Item {
     property alias cfg_showCoinName: showCoinNameCheckBox.checked
     property alias cfg_showPair: showPairCheckBox.checked
     property alias cfg_decimalPlaces: decimalPlacesSpinBox.value
+    property alias cfg_priceMultiplier: priceMultiplierField.text
     property alias cfg_textColor: textColorField.text
     property alias cfg_timeRefresh: timeRefreshSpinBox.value
     property alias cfg_blinkRefresh: blinkRefreshCheckBox.checked
@@ -203,6 +204,43 @@ Item {
                 onValueChanged: configurationChanged()
             }
 
+            // Price Multiplier with tooltip
+            Item {
+                Layout.minimumWidth: root.width / 2
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                RowLayout {
+                    anchors.fill: parent
+                    spacing: 2
+
+                    Label {
+                        text: i18n("Price Multiplier:")
+                        horizontalAlignment: Label.AlignRight
+                        verticalAlignment: Label.AlignVCenter
+                        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+                        Layout.fillWidth: true
+                    }
+                    ToolButton {
+                        icon.name: "help-about"
+                        implicitWidth: Kirigami.Units.iconSizes.small
+                        implicitHeight: Kirigami.Units.iconSizes.small
+                        ToolTip.visible: hovered
+                        ToolTip.text: i18n("Multiply price by this value. Use only numbers (example: 2.381). Max 3 decimal places. See the README at https://github.com/bitcoin-crazy/another-plasma6-coin for details.")
+                        hoverEnabled: true
+                        Layout.alignment: Qt.AlignVCenter
+                    }
+                }
+            }
+            TextField {
+                id: priceMultiplierField
+                text: "1.0"
+                placeholderText: i18n("Ex: 2 or 2.381")
+                validator: RegularExpressionValidator {
+                    regularExpression: /^([0-9]{1,6})(\.[0-9]{0,3})?$/
+                }
+                onTextChanged: configRoot.configurationChanged()
+            }
+
             // Choose color
             Item {
                 Layout.minimumWidth: root.width / 2
@@ -308,7 +346,6 @@ Item {
                     configurationChanged()
                 }
             }
-
         }
 
         // Applet version

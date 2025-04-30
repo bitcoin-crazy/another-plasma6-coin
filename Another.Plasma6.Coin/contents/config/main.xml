@@ -24,6 +24,9 @@
     <entry name="showPair" type="bool">
       <default>false</default>
     </entry>
+    <entry name="priceMultiplier" type="string">
+      <default>1</default>
+    </entry>
     <entry name="decimalPlaces" type="int">
       <default>0</default>
     </entry>
