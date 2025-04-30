@@ -1,3 +1,8 @@
+Version 2.2 - 2025-04-30
+  * Added a refresh time option. The value is between 1 and 60 minutes.
+  * Added a blinking on price refresh option.
+  * Updated README.md.
+
 Version 2.1 - 2025-04-21
   * Increased delay of the click price update.
   * Implemented colors. Now, users can apply colors to prices.
