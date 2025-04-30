@@ -3,6 +3,10 @@
 - Update README.md if needed.
 - Update ChangeLog at GitHub.
 - Update copyright date.
+- Verify copyright notices at:
+    ~ CompactRepresentation.qml
+    ~ GeneralConfig.qml
+    ~ GetAPI.qml
 - Verify commits author (name and email).
 - Change version at:
     ~ Metadata.json
@@ -12,4 +16,5 @@
     ~ GitHub
     ~ KDE Store
 - Update ChangeLog on KDE Store.
-- Update Version no KDE Store (Edit).
+- Update Version on KDE Store (Edit).
+- Update screenshots on KDE Store (Edit).
