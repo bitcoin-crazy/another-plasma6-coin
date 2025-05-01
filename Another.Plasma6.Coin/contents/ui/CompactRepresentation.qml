@@ -55,7 +55,7 @@ ColumnLayout {
         }
         font.bold: Plasmoid.configuration.textBold
         font.capitalization: Font.AllUppercase
-        text: Plasmoid.configuration.coinName
+        text: Plasmoid.configuration.coinName + (Plasmoid.configuration.priceMultiplier !== "1" && Plasmoid.configuration.priceMultiplier !== "" ? "*" : "")
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignTop
     }
@@ -73,7 +73,7 @@ ColumnLayout {
         }
         font.bold: Plasmoid.configuration.textBold
         font.capitalization: Font.AllUppercase
-        text: Plasmoid.configuration.coinName + "/" + Plasmoid.configuration.currency.toUpperCase()
+        text: Plasmoid.configuration.coinName + "/" + Plasmoid.configuration.currency.toUpperCase() + (Plasmoid.configuration.priceMultiplier !== "1" && Plasmoid.configuration.priceMultiplier !== "" ? "*" : "")
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignTop
     }
