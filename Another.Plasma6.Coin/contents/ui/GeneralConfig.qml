@@ -41,6 +41,7 @@ Item {
     property alias cfg_textColor: textColorField.text
     property alias cfg_timeRefresh: timeRefreshSpinBox.value
     property alias cfg_blinkRefresh: blinkRefreshCheckBox.checked
+    property alias cfg_useThousandsSeparator: thousandsSeparatorCheckBox.checked
 
     ColumnLayout {
         Layout.preferredWidth: parent.width - Kirigami.Units.largeSpacing * 2
@@ -225,7 +226,7 @@ Item {
                         implicitWidth: Kirigami.Units.iconSizes.small
                         implicitHeight: Kirigami.Units.iconSizes.small
                         ToolTip.visible: hovered
-                        ToolTip.text: i18n("Multiply price by this value. Use only numbers (example: 2.381). Max 3 decimal places. See the README at https://github.com/bitcoin-crazy/another-plasma6-coin for details.")
+                        ToolTip.text: i18n("Increase or decrease the price. Default: 1")
                         hoverEnabled: true
                         Layout.alignment: Qt.AlignVCenter
                     }
@@ -233,131 +234,70 @@ Item {
             }
             TextField {
                 id: priceMultiplierField
-                text: "1.0"
-                placeholderText: i18n("Ex: 2 or 2.381")
-                validator: RegularExpressionValidator {
-                    regularExpression: /^([0-9]{1,6})(\.[0-9]{0,3})?$/
-                }
-                onTextChanged: configRoot.configurationChanged()
+                text: "1"
+                onTextChanged: configurationChanged()
             }
 
-            // Choose color
-            Item {
+            // Thousands Separator
+            Label {
                 Layout.minimumWidth: root.width / 2
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                RowLayout {
-                    anchors.fill: parent
-                    spacing: 2
+                text: i18n("Thousands Separator:")
+                horizontalAlignment: Label.AlignRight
+            }
+            CheckBox {
+                id: thousandsSeparatorCheckBox
+                text: i18n("")
+                checked: false
+                onCheckedChanged: configurationChanged()
+                ToolTip.visible: hovered
+                ToolTip.text: i18n("Format numbers with a thousands separator (e.g., 1,000).")
+            }
 
-                    Label {
-                        text: i18n("Text Color (empty=default):")
-                        horizontalAlignment: Label.AlignRight
-                        verticalAlignment: Label.AlignVCenter
-                        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                        Layout.fillWidth: true
-                    }
-                    ToolButton {
-                        icon.name: "help-about"
-                        implicitWidth: Kirigami.Units.iconSizes.small
-                        implicitHeight: Kirigami.Units.iconSizes.small
-                        ToolTip.visible: hovered
-                        ToolTip.text: i18n("Use color names (red, yellowgreen) or HEX code (#ffff00 for yellow). Leave empty to use the theme's default color. Tips in README at https://github.com/bitcoin-crazy/another-plasma6-coin")
-                        hoverEnabled: true
-                        Layout.alignment: Qt.AlignVCenter
-                    }
-                }
+            // Text Color
+            Label {
+                Layout.minimumWidth: root.width / 2
+                text: i18n("Text Color:")
+                horizontalAlignment: Label.AlignRight
             }
             TextField {
                 id: textColorField
-                text: Plasmoid.configuration.textColor || ""
-                placeholderText: i18n("Name color or HEX (#RRGGBB)")
-                onTextChanged: configRoot.configurationChanged()
+                text: "#000000"  // Definindo uma cor padrão
+                onTextChanged: configurationChanged()
+                ToolTip.visible: hovered
+                ToolTip.text: i18n("Use color names (red, yellowgreen) or HEX code (#ffff00 for yellow). Leave empty to use the theme's default color. Tips in README at https://github.com/bitcoin-crazy/another-plasma6-coin")
             }
 
-            // Time refresh with tooltip
-            Item {
+            // Time Refresh
+            Label {
                 Layout.minimumWidth: root.width / 2
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                RowLayout {
-                    anchors.fill: parent
-                    spacing: 2
-
-                    Label {
-                        text: i18n("Time Refresh (minutes):")
-                        horizontalAlignment: Label.AlignRight
-                        verticalAlignment: Label.AlignVCenter
-                        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                        Layout.fillWidth: true
-                    }
-                    ToolButton {
-                        icon.name: "help-about"
-                        implicitWidth: Kirigami.Units.iconSizes.small
-                        implicitHeight: Kirigami.Units.iconSizes.small
-                        ToolTip.visible: hovered
-                        ToolTip.text: i18n("Minutes to refresh the coin value. Valid range: 1–60.")
-                        hoverEnabled: true
-                        Layout.alignment: Qt.AlignVCenter
-                    }
-                }
+                text: i18n("Time Refresh (minutes):")
+                horizontalAlignment: Label.AlignRight
             }
             SpinBox {
                 id: timeRefreshSpinBox
                 from: 1
                 to: 60
-                value: 3
+                value: 10
                 stepSize: 1
-                onValueChanged: configRoot.configurationChanged()
+                onValueChanged: configurationChanged()
+                ToolTip.visible: hovered
+                ToolTip.text: i18n("Minutes to refresh the coin value. Valid range: 1–60.")
             }
 
-            // Blink Refresh checkbox with tooltip
-            Item {
+            // Blink Refresh
+            Label {
                 Layout.minimumWidth: root.width / 2
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                RowLayout {
-                    anchors.fill: parent
-                    spacing: 2
-
-                    Label {
-                        text: i18n("Blink Refresh:")
-                        horizontalAlignment: Label.AlignRight
-                        verticalAlignment: Label.AlignVCenter
-                        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                        Layout.fillWidth: true
-                    }
-                    ToolButton {
-                        icon.name: "help-about"
-                        implicitWidth: Kirigami.Units.iconSizes.small
-                        implicitHeight: Kirigami.Units.iconSizes.small
-                        ToolTip.visible: hovered
-                        ToolTip.text: i18n("Blink the price when it refreshes.")
-                        hoverEnabled: true
-                        Layout.alignment: Qt.AlignVCenter
-                    }
-                }
+                text: i18n("Blink Refresh:")
+                horizontalAlignment: Label.AlignRight
             }
             CheckBox {
                 id: blinkRefreshCheckBox
                 text: i18n("")
                 checked: false
-                onCheckedChanged: {
-                    configurationChanged()
-                }
+                onCheckedChanged: configurationChanged()
+                ToolTip.visible: hovered
+                ToolTip.text: i18n("Blink the price when it refreshes.")
             }
-        }
-
-        // Applet version
-        Item {
-            Layout.fillWidth: true
-            Layout.preferredHeight: Kirigami.Units.largeSpacing * 2
-        }
-
-        Label {
-            text: "     Another Plasma6 Coin, version: 2.2"
-            horizontalAlignment: Label.AlignCenter
-            Layout.fillWidth: true
         }
     }
 }

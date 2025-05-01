@@ -18,6 +18,25 @@ ColumnLayout {
     property int pixelFontVar2: pixelFontVar * 0.7
     property int heightroot: 20
 
+    // Function for thousands separator
+    function formatPrice(price) {
+        // Ensure price is always a number
+        let numPrice = parseFloat(price);
+
+        // Check if it's a valid number
+        if (isNaN(numPrice)) {
+            return price; // Return original value if not a valid number
+        }
+
+        // Apply thousand separator if needed
+        if (Plasmoid.configuration.useThousandsSeparator) {
+            return numPrice.toFixed(Plasmoid.configuration.decimalPlaces).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+        }
+
+        // Return the formatted price
+        return numPrice.toFixed(Plasmoid.configuration.decimalPlaces);
+    }
+
     Layout.minimumWidth: coinNameText.implicitWidth + pixelFontVar * 4
     Layout.minimumHeight: heightroot
 
@@ -37,7 +56,7 @@ ColumnLayout {
             // Apply price multiplier from configuration
             var price = parseFloat(getApi.price);
             var multiplier = Plasmoid.configuration.priceMultiplier || 1; // Default to 1 if multiplier is not set
-            return (price * multiplier).toFixed(Plasmoid.configuration.decimalPlaces);
+            return formatPrice((price * multiplier).toFixed(Plasmoid.configuration.decimalPlaces));
         }
         return "?";
     }
