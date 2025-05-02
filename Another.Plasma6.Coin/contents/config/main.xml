@@ -30,6 +30,12 @@
     <entry name="decimalPlaces" type="int">
       <default>0</default>
     </entry>
+    <entry name="useThousandsSeparator" type="bool">
+      <default>false</default>
+    </entry>
+    <entry name="swapCommasDots" type="bool">
+      <default>false</default>
+    </entry>
     <entry name="textColor" type="string">
       <default></default>
     </entry>
@@ -37,9 +43,6 @@
       <default>3</default>
     </entry>
     <entry name="blinkRefresh" type="bool">
-      <default>false</default>
-    </entry>
-    <entry name="useThousandsSeparator" type="bool">
       <default>false</default>
     </entry>
   </group>

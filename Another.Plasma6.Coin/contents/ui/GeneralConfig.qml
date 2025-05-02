@@ -30,18 +30,19 @@ Item {
         property var showPair
     }
 
-    property alias cfg_coinName: cryptoValue.coinName
-    property alias cfg_currency: cryptoValue.currency
     property alias cfg_fontSize: fontsizedefault.value
     property alias cfg_textBold: boldTextCkeck.checked
+    property alias cfg_coinName: cryptoValue.coinName
+    property alias cfg_currency: cryptoValue.currency
     property alias cfg_showCoinName: showCoinNameCheckBox.checked
     property alias cfg_showPair: showPairCheckBox.checked
     property alias cfg_decimalPlaces: decimalPlacesSpinBox.value
     property alias cfg_priceMultiplier: priceMultiplierField.text
+    property alias cfg_useThousandsSeparator: thousandsSeparatorCheckBox.checked
+    property alias cfg_swapCommasDots: swapCommasDotsCheckBox.checked
     property alias cfg_textColor: textColorField.text
     property alias cfg_timeRefresh: timeRefreshSpinBox.value
     property alias cfg_blinkRefresh: blinkRefreshCheckBox.checked
-    property alias cfg_useThousandsSeparator: thousandsSeparatorCheckBox.checked
 
     ColumnLayout {
         Layout.preferredWidth: parent.width - Kirigami.Units.largeSpacing * 2
@@ -226,7 +227,7 @@ Item {
                         implicitWidth: Kirigami.Units.iconSizes.small
                         implicitHeight: Kirigami.Units.iconSizes.small
                         ToolTip.visible: hovered
-                        ToolTip.text: i18n("Increase or decrease the price. Default: 1")
+                        ToolTip.text: i18n("Multiply price by this value. Use only numbers (example: 2.381). Max 3 decimal places. Default: 1. See the README at https://github.com/bitcoin-crazy/another-plasma6-coin for details.")
                         hoverEnabled: true
                         Layout.alignment: Qt.AlignVCenter
                     }
@@ -250,7 +251,25 @@ Item {
                 checked: false
                 onCheckedChanged: configurationChanged()
                 ToolTip.visible: hovered
-                ToolTip.text: i18n("Format numbers with a thousands separator (e.g., 1,000).")
+                ToolTip.text: i18n("Format numbers with a thousands separator (e.g., 1,000.23).")
+            }
+
+            // Swap commas-dots
+            Label {
+                Layout.minimumWidth: root.width / 2
+                text: i18n("Swap commas-dots:")
+                horizontalAlignment: Label.AlignRight
+            }
+            CheckBox {
+                id: swapCommasDotsCheckBox
+                text: i18n("")
+                checked: cfg_swapCommasDots
+                onCheckedChanged: {
+                    configurationChanged()
+                    cfg_swapCommasDots = checked
+                }
+                ToolTip.visible: hovered
+                ToolTip.text: i18n("Swap commas for dots and vice-versa to match usage in each country.")
             }
 
             // Text Color
@@ -261,7 +280,7 @@ Item {
             }
             TextField {
                 id: textColorField
-                text: "#000000"  // Definindo uma cor padrão
+                text: "#000000"
                 onTextChanged: configurationChanged()
                 ToolTip.visible: hovered
                 ToolTip.text: i18n("Use color names (red, yellowgreen) or HEX code (#ffff00 for yellow). Leave empty to use the theme's default color. Tips in README at https://github.com/bitcoin-crazy/another-plasma6-coin")

@@ -29,12 +29,26 @@ ColumnLayout {
         }
 
         // Apply thousand separator if needed
-        if (Plasmoid.configuration.useThousandsSeparator) {
-            return numPrice.toFixed(Plasmoid.configuration.decimalPlaces).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+        let formattedPrice = numPrice.toFixed(Plasmoid.configuration.decimalPlaces);
+
+        // If swapCommasDots is enabled, swap commas and dots
+        if (Plasmoid.configuration.swapCommasDots) {
+            // Swap the dot in the decimal place to a comma
+            formattedPrice = formattedPrice.replace('.', ',');
+
+            // Apply thousands separator using a dot (if thousands separator is enabled)
+            if (Plasmoid.configuration.useThousandsSeparator) {
+                formattedPrice = formattedPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            }
+        } else {
+            // If swapCommasDots is not enabled, apply thousands separator with dot
+            if (Plasmoid.configuration.useThousandsSeparator) {
+                formattedPrice = formattedPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
         }
 
         // Return the formatted price
-        return numPrice.toFixed(Plasmoid.configuration.decimalPlaces);
+        return formattedPrice;
     }
 
     Layout.minimumWidth: coinNameText.implicitWidth + pixelFontVar * 4
