@@ -227,16 +227,24 @@ Item {
                         implicitWidth: Kirigami.Units.iconSizes.small
                         implicitHeight: Kirigami.Units.iconSizes.small
                         ToolTip.visible: hovered
-                        ToolTip.text: i18n("Multiply price by this value. Use only numbers (example: 2.381). Max 3 decimal places. Default: 1. See the README at https://github.com/bitcoin-crazy/another-plasma6-coin for details.")
+                        ToolTip.text: i18n("Multiply price by this value. Use only numbers (example: 1.3812). Max 4 decimal places. Default: 1. See the README at https://github.com/bitcoin-crazy/another-plasma6-coin for details.")
                         hoverEnabled: true
                         Layout.alignment: Qt.AlignVCenter
                     }
                 }
             }
+
             TextField {
                 id: priceMultiplierField
                 text: "1"
-                onTextChanged: configurationChanged()
+                onTextChanged: {
+                    // Check for 4 decimal places
+                    var regex = /^[0-9]*\.?[0-9]{0,4}$/;
+                    if (!regex.test(priceMultiplierField.text)) {
+                        priceMultiplierField.text = priceMultiplierField.text.slice(0, -1);
+                    }
+                    configurationChanged()
+                }
             }
 
             // Thousands Separator
