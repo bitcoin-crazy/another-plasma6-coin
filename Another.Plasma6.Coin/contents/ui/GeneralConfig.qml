@@ -304,6 +304,6 @@ Item {
                 ToolTip.visible: hovered
                 ToolTip.text: i18n("Blink the price when it refreshes.")
             }
-        }
-    }
-}
+        }  // Closing GridLayout
+    }      // Closing ColumnLayout
+}          // Closing Item
