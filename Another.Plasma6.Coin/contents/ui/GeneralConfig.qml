@@ -162,7 +162,7 @@ Item {
             // Show Pair
             Label {
                 Layout.minimumWidth: root.width / 2
-                text: i18n("Show Pair (ex: BTC/USD):")
+                text: i18n("Show Pair (ex: BTC/USDT):")
                 horizontalAlignment: Label.AlignRight
             }
             CheckBox {
@@ -304,6 +304,19 @@ Item {
                 ToolTip.visible: hovered
                 ToolTip.text: i18n("Blink the price when it refreshes.")
             }
+
+            // Applet version
+            Label {
+                Layout.minimumWidth: root.width / 2
+                text: i18n("AP6 Coin, version:")
+                horizontalAlignment: Label.AlignRight
+            }
+
+            Label {
+                Layout.minimumWidth: root.width / 2
+                text: i18n("2.2    (2025-05-02)")
+            }
+
         }  // Closing GridLayout
     }      // Closing ColumnLayout
 }          // Closing Item
