@@ -95,15 +95,6 @@ Item {
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                         Layout.fillWidth: true
                     }
-                    ToolButton {
-                        icon.name: "help-about"
-                        implicitWidth: Kirigami.Units.iconSizes.small
-                        implicitHeight: Kirigami.Units.iconSizes.small
-                        ToolTip.visible: hovered
-                        ToolTip.text: i18n("More coins? See the README at https://github.com/bitcoin-crazy/another-plasma6-coin")
-                        hoverEnabled: true
-                        Layout.alignment: Qt.AlignVCenter
-                    }
                 }
             }
             ComboBox {
@@ -115,6 +106,8 @@ Item {
                     cryptoValue.coinName = currentValue
                 }
                 Component.onCompleted: currentIndex = indexOfValue(cryptoValue.coinName)
+                ToolTip.visible: hovered
+                ToolTip.text: i18n("More coins? See the README at https://github.com/bitcoin-crazy/another-plasma6-coin")
             }
 
             // To Crypto with tooltip
@@ -133,15 +126,6 @@ Item {
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                         Layout.fillWidth: true
                     }
-                    ToolButton {
-                        icon.name: "help-about"
-                        implicitWidth: Kirigami.Units.iconSizes.small
-                        implicitHeight: Kirigami.Units.iconSizes.small
-                        ToolTip.visible: hovered
-                        ToolTip.text: i18n("More currencies? See the README at https://github.com/bitcoin-crazy/another-plasma6-coin")
-                        hoverEnabled: true
-                        Layout.alignment: Qt.AlignVCenter
-                    }
                 }
             }
             ComboBox {
@@ -153,6 +137,8 @@ Item {
                     cryptoValue.currency = currentValue
                 }
                 Component.onCompleted: currentIndex = indexOfValue(cryptoValue.currency)
+                ToolTip.visible: hovered
+                ToolTip.text: i18n("More currencies? See the README at https://github.com/bitcoin-crazy/another-plasma6-coin")
             }
 
             // Show Coin Name
@@ -222,15 +208,6 @@ Item {
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                         Layout.fillWidth: true
                     }
-                    ToolButton {
-                        icon.name: "help-about"
-                        implicitWidth: Kirigami.Units.iconSizes.small
-                        implicitHeight: Kirigami.Units.iconSizes.small
-                        ToolTip.visible: hovered
-                        ToolTip.text: i18n("Multiply price by this value. Use only numbers (example: 1.3812). Max 4 decimal places. Default: 1. See the README at https://github.com/bitcoin-crazy/another-plasma6-coin for details.")
-                        hoverEnabled: true
-                        Layout.alignment: Qt.AlignVCenter
-                    }
                 }
             }
 
@@ -245,6 +222,8 @@ Item {
                     }
                     configurationChanged()
                 }
+                ToolTip.visible: hovered
+                ToolTip.text: i18n("Multiply price by this value. Use only numbers (example: 1.3812). Max 4 decimal places. Default: 1. See the README at https://github.com/bitcoin-crazy/another-plasma6-coin for details.")
             }
 
             // Thousands Separator
