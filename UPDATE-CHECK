@@ -11,7 +11,7 @@
     ~ GetAPI.qml
 - Verify commits author (name and email).
 - Change version at:
-    ~ Metadata.json
+    ~ metadata.json
     ~ GeneralConfig.qml
 - Release on GitHub.
 - Upload tarball (tar.xz) to:
