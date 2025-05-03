@@ -227,7 +227,7 @@ Item {
                         configurationChanged()
                     }
                     ToolTip.visible: hovered
-                    ToolTip.text: i18n("Multiply price by this value. Use only numbers (example: 1.3812). Max 4 decimal places. Default: 1. See the README at https://github.com/bitcoin-crazy/another-plasma6-coin for details.")
+                    ToolTip.text: i18n("Multiply price by this value. Use only numbers (example: 1.3812). Max 4 decimal places. Default: 1. An asterisk will be placed near of the coin/pair name to symbolize the use of this feature. See the README at https://github.com/bitcoin-crazy/another-plasma6-coin for details.")
                 }
 
                 // Thousands Separator
@@ -318,7 +318,7 @@ Item {
 
                 Label {
                     Layout.minimumWidth: root.width / 2
-                    text: i18n("2.2    (2025-05-02)")
+                    text: i18n("2.3    (2025-05-03)")
                 }
 
             }  // Closing GridLayout
