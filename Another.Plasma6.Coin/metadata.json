@@ -14,7 +14,7 @@
         "EnabledByDefault": true,
         "License": "GPL-3.0+",
         "BugReportUrl": "https://github.com/bitcoin-crazy/another-plasma6-coin/issues",
-        "Version": "2.2",
+        "Version": "2.3",
         "Website": "https://github.com/bitcoin-crazy/another-plasma6-coin/"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
