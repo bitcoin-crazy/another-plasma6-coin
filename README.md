@@ -32,15 +32,17 @@ Binance API x CoinGecko API:
 
 If you are interested in CoinGecko, see the branch [`ap6c-1.2.1-coingecko-archived`](https://github.com/bitcoin-crazy/another-plasma6-coin/tree/ap6c-1.2.1-coingecko-archived) on this Git repository or download the [version 1.2](https://github.com/bitcoin-crazy/another-plasma6-coin/releases/tag/v1.2).
 
-This applet will show the price of coins in toolbar and it has the following resources and features:
+This applet displays coin prices in the toolbar and includes the following features:
 
-* Update of prices every "x" minutes, where "x" is a number between 1 and 60.
-* Retry after 1 minute if the last call fails.
-* Immediate update of a price when clicking over it.
-* Possibility to use decimal places.
-* Possibility to show the name of the coin, or the name of coin and the currency, or none.
-* Possibility to apply colors to prices.
-* The `ERR` (Error) message will be shown when a wrong pair of coins is selected or when occurs other error.
+* Price updates every x minutes, where x is a number between 1 and 60.
+* Retry after 1 minute if the last update fails.
+* Immediate price update when clicking on it.
+* Support for decimal places.
+* Option to display the coin name, the coin and currency pair, or neither.
+* Option to apply colors to prices.
+* Option to use a customizable thousands separator.
+* Option to apply a price multiplier.
+* The `ERR` (Error) message is shown when an invalid coin pair is selected or another error occurs.
 
 ## How to install
 
@@ -83,14 +85,27 @@ Another way to install __Another Plasma6 Coin__ is to make it manually.
 
 There are some options in `Configuration` window.
 
-* The `Font Size for Price` will determine the size of the price. The name of the coin will be shown above the price and size of this will be 70% of the price size.
+* The `Font Size for Price` will determine the size of the price. The name of the coin will be shown above the price and its size will be 70% of the price size.
 * `Bold` is for price and coin name.
-* `From Crypto` will select the cryptocurrency and `To Crypto/Currency` will select the pair to be utilized.
+* `From Crypto` will select the cryptocurrency, and `To Crypto/Currency` will select the pair to be used.
 * `Show Coin Name` and `Show Pair`: only one of these can be selected, but both can be unselected.
 * `Decimal Places` is for fractional numbers.
-* `Text Color` allows the user to choose a color for the price. If empty, the default theme color will be shown. It is possible to use a color name (like `yellow`, `yellowgreen`) or a hex color code (like `#00ff00` or `#00FF00`). The character "`#`" is mandatory for hex colors. There is a color name table available [here](https://doc.qt.io/qt-6/qml-color.html#svg-color-reference). To choose a hex color, use the KColorChooser program, available on KDE Plasma 6.
+* `Price Multiplier` allows the user to add an integer or a fractional number to multiply the current price. Up to 4 decimal places can be used. An asterisk will be placed near of the coin/pair name to symbolize the use of this feature. E.g. BTC/USDT* See more details below in the section _When to use Price Multiplier?_
+* `Thousands Separator` add commas to separate the thousands in the price.
+* `Swap commas-dots` swaps commas for dots and vice-versa to match usage in each country. E.g., from 1,000.23 to 1.000,23
+* `Text Color` allows the user to choose a color for the price. If empty, the default theme color will be used. It is possible to use a color name (like `yellow`, `yellowgreen`) or a hex color code (like `#00ff00` or `#00FF00`). The character "`#`" is mandatory for hex colors. There is a color name table available [here](https://doc.qt.io/qt-6/qml-color.html#svg-color-reference). To choose a hex color, use the KColorChooser program, available on KDE Plasma 6.
 * `Time Refresh` sets the time in minutes to auto-refresh the price. This is a value between 1 and 60.
 * `Blink Refresh` defines if the price will blink when refreshing (automatically or via click).
+
+## When to use Price Multiplier?
+
+The Price Multiplier is a feature that allows you to multiply the current price by an integer or fractional number. You can use up to four decimal places, such as 1.3125. An asterisk will appear next to the coin/pair name to indicate that this feature is in use. For example: BTC/USDT*.
+
+This feature is useful in two scenarios:
+
+* Suppose you live in _Narnia_, where the official currency is _NAR_. If _1 USDT = 2.33 NAR_, you can select BTC/USDT and apply a multiplier of 2.33 to display the price in _NAR_.
+
+* Suppose you own 1.234 BTC. You can use 1.234 as the multiplier to see the total value in USD or another currency.
 
 ## Hacking the source code
 
