@@ -1,3 +1,12 @@
+Version 2.3 - 2025-05-03
+  * Added 8 new coins.
+  * Added Price Multiplier option.
+  * Added optional thousands separator.
+  * Added optional swap commas-dots.
+  * Added vertical scroll bar for configuration screen to be displayed when needed.
+  * Added script check-top-100.sh to improve the searching for new coins.
+  * Updated README.md.
+
 Version 2.2 - 2025-04-30
   * Added a refresh time option. The value is between 1 and 60 minutes.
   * Added a blinking on price refresh option.
