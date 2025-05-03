@@ -33,18 +33,24 @@ ListModel {
     ListElement { name: "FLOKI" }
     ListElement { name: "FORM" }
     ListElement { name: "GALA" }
+    ListElement { name: "GRT" }
     ListElement { name: "HBAR" }
+    ListElement { name: "HNT" }
     ListElement { name: "ICP" }
     ListElement { name: "IMX" }
     ListElement { name: "INJ" }
+    ListElement { name: "IOTA" }
+    ListElement { name: "JASMY" }
     ListElement { name: "JTO" }
     ListElement { name: "JUP" }
+    ListElement { name: "KAIA" }
     ListElement { name: "LDO" }
     ListElement { name: "LINK" }
     ListElement { name: "LTC" }
     ListElement { name: "MANA" }
     ListElement { name: "MKR" }
     ListElement { name: "NEAR" }
+    ListElement { name: "NEXO" }
     ListElement { name: "ONDO" }
     ListElement { name: "OP" }
     ListElement { name: "PAXG" }
@@ -64,6 +70,7 @@ ListModel {
     ListElement { name: "STX" }
     ListElement { name: "SUI" }
     ListElement { name: "TAO" }
+    ListElement { name: "THETA" }
     ListElement { name: "TIA" }
     ListElement { name: "TON" }
     ListElement { name: "TRUMP" }
@@ -71,6 +78,7 @@ ListModel {
     ListElement { name: "UNI" }
     ListElement { name: "USDS" }
     ListElement { name: "VET" }
+    ListElement { name: "VIRTUAL" }
     ListElement { name: "WBTC" }
     ListElement { name: "WLD" }
     ListElement { name: "XLM" }
