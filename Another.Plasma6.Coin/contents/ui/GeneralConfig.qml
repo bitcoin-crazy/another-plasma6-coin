@@ -220,14 +220,14 @@ Item {
                     text: "1"
                     onTextChanged: {
                         // Check for 4 decimal places
-                        var regex = /^[0-9]*\.?[0-9]{0,4}$/;
+                        var regex = /^[0-9]*\.?[0-9]{0,8}$/;
                         if (!regex.test(priceMultiplierField.text)) {
                             priceMultiplierField.text = priceMultiplierField.text.slice(0, -1);
                         }
                         configurationChanged()
                     }
                     ToolTip.visible: hovered
-                    ToolTip.text: i18n("Multiply price by this value. Use only numbers (example: 1.3812). Max 4 decimal places. Default: 1. An asterisk will be placed near of the coin/pair name to symbolize the use of this feature. See the README at https://github.com/bitcoin-crazy/another-plasma6-coin for details.")
+                    ToolTip.text: i18n("Multiply price by this value. Use only numbers (example: 1.3812). Max 8 decimal places. Default: 1. An asterisk will be placed near of the coin/pair name to symbolize the use of this feature. See the README at https://github.com/bitcoin-crazy/another-plasma6-coin for details.")
                 }
 
                 // Thousands Separator

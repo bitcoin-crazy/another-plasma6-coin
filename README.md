@@ -90,7 +90,7 @@ There are some options in `Configuration` window.
 * `From Crypto` will select the cryptocurrency, and `To Crypto/Currency` will select the pair to be used.
 * `Show Coin Name` and `Show Pair`: only one of these can be selected, but both can be unselected.
 * `Decimal Places` is for fractional numbers.
-* `Price Multiplier` allows the user to add an integer or a fractional number to multiply the current price. Up to 4 decimal places can be used. An asterisk will be placed near of the coin/pair name to symbolize the use of this feature. E.g. BTC/USDT* See more details below in the section _When to use Price Multiplier?_
+* `Price Multiplier` allows the user to add an integer or a fractional number to multiply the current price. Up to 8 decimal places can be used. An asterisk will be placed near of the coin/pair name to symbolize the use of this feature. E.g. BTC/USDT* See more details below in the section _When to use Price Multiplier?_
 * `Thousands Separator` add commas to separate the thousands in the price.
 * `Swap commas-dots` swaps commas for dots and vice-versa to match usage in each country. E.g., from 1,000.23 to 1.000,23
 * `Text Color` allows the user to choose a color for the price. If empty, the default theme color will be used. It is possible to use a color name (like `yellow`, `yellowgreen`) or a hex color code (like `#00ff00` or `#00FF00`). The character "`#`" is mandatory for hex colors. There is a color name table available [here](https://doc.qt.io/qt-6/qml-color.html#svg-color-reference). To choose a hex color, use the KColorChooser program, available on KDE Plasma 6.
