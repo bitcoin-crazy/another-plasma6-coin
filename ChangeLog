@@ -1,7 +1,7 @@
 Version 2.4 - 2025-05-12
   * Added 36 new coins. Current total: 119 coins.
   * Added a timeout to declarer lost connection, displaying ERR for this event.
-  * Allowing up to 8 decimal places instead of 4.
+  * Allowing up to 8 decimal places instead of 4 for Price Multiplier.
   * Updated README.md.
 
 Version 2.3 - 2025-05-03
