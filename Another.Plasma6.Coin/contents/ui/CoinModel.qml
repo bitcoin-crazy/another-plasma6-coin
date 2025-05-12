@@ -6,33 +6,48 @@ ListModel {
     ListElement { name: "SOL" }
     ListElement { name: "USDT" }
     ListElement { name: "USDC" }
+    ListElement { name: "1INCH" }
     ListElement { name: "AAVE" }
     ListElement { name: "ADA" }
     ListElement { name: "ALGO" }
+    ListElement { name: "APE" }
     ListElement { name: "APT" }
+    ListElement { name: "AR" }
     ListElement { name: "ARB" }
     ListElement { name: "ATOM" }
     ListElement { name: "AVAX" }
+    ListElement { name: "AXS" }
     ListElement { name: "BCH" }
+    ListElement { name: "BERA" }
+    ListElement { name: "BLUR" }
     ListElement { name: "BNB" }
     ListElement { name: "BONK" }
+    ListElement { name: "BTTC" }
     ListElement { name: "CAKE" }
     ListElement { name: "CHZ" }
+    ListElement { name: "COMP" }
     ListElement { name: "CRV" }
     ListElement { name: "DAI" }
     ListElement { name: "DEXE" }
     ListElement { name: "DOGE" }
     ListElement { name: "DOT" }
     ListElement { name: "DYDX" }
+    ListElement { name: "EGLD" }
+    ListElement { name: "EIGEN" }
     ListElement { name: "ENA" }
+    ListElement { name: "ENJ" }
     ListElement { name: "ENS" }
     ListElement { name: "EOS" }
     ListElement { name: "ETC" }
+    ListElement { name: "ETHFI" }
     ListElement { name: "FET" }
     ListElement { name: "FIL" }
     ListElement { name: "FLOKI" }
+    ListElement { name: "FLOW" }
     ListElement { name: "FORM" }
+    ListElement { name: "FTT" }
     ListElement { name: "GALA" }
+    ListElement { name: "GMX" }
     ListElement { name: "GRT" }
     ListElement { name: "HBAR" }
     ListElement { name: "HNT" }
@@ -44,17 +59,25 @@ ListModel {
     ListElement { name: "JTO" }
     ListElement { name: "JUP" }
     ListElement { name: "KAIA" }
+    ListElement { name: "KAVA" }
+    ListElement { name: "KMNO" }
+    ListElement { name: "KSM" }
     ListElement { name: "LDO" }
     ListElement { name: "LINK" }
     ListElement { name: "LTC" }
+    ListElement { name: "LUNC" }
     ListElement { name: "MANA" }
+    ListElement { name: "MANTA" }
     ListElement { name: "MKR" }
+    ListElement { name: "MOVE" }
     ListElement { name: "NEAR" }
+    ListElement { name: "NEO" }
     ListElement { name: "NEXO" }
     ListElement { name: "ONDO" }
     ListElement { name: "OP" }
     ListElement { name: "PAXG" }
     ListElement { name: "PENDLE" }
+    ListElement { name: "PENGU" }
     ListElement { name: "PEPE" }
     ListElement { name: "POL" }
     ListElement { name: "PYTH" }
@@ -66,9 +89,15 @@ ListModel {
     ListElement { name: "S" }
     ListElement { name: "SAND" }
     ListElement { name: "SEI" }
+    ListElement { name: "SFP" }
     ListElement { name: "SHIB" }
+    ListElement { name: "SNX" }
+    ListElement { name: "STG" }
+    ListElement { name: "STRK" }
     ListElement { name: "STX" }
     ListElement { name: "SUI" }
+    ListElement { name: "SUPER" }
+    ListElement { name: "SUSHI" }
     ListElement { name: "TAO" }
     ListElement { name: "THETA" }
     ListElement { name: "TIA" }
@@ -79,9 +108,16 @@ ListModel {
     ListElement { name: "USDS" }
     ListElement { name: "VET" }
     ListElement { name: "VIRTUAL" }
+    ListElement { name: "W" }
     ListElement { name: "WBTC" }
+    ListElement { name: "WIF" }
     ListElement { name: "WLD" }
     ListElement { name: "XLM" }
     ListElement { name: "XMR" }
     ListElement { name: "XRP" }
+    ListElement { name: "XTZ" }
+    ListElement { name: "YFI" }
+    ListElement { name: "ZEC" }
+    ListElement { name: "ZK" }
+    ListElement { name: "ZRO" }
 }
