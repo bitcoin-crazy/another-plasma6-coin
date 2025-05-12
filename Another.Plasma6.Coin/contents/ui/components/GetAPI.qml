@@ -28,9 +28,12 @@ Item {
     function updateAPI(url) {
         const req = new XMLHttpRequest();
         req.open("GET", url, true);
+        req.timeout = 20000; // Timeout after 20 seconds
 
         req.onreadystatechange = function () {
             if (req.readyState !== 4) return;
+
+            requestTimeoutWatchdog.stop(); // Stop watchdog if request completed
 
             if (req.status === 200) {
                 try {
@@ -51,7 +54,16 @@ Item {
             }
         };
 
+        req.ontimeout = function () {
+            console.error("AP6C: Request timed out");
+            requestTimeoutWatchdog.stop(); // Stop watchdog if request completed
+            price = "E"; // Use 'E' to indicate timeout
+            inErrorState = true;
+            retry.start(); // Retry on timeout
+        };
+
         req.send();
+        requestTimeoutWatchdog.restart(); // Start the fallback watchdog
     }
 
     Timer {
@@ -68,6 +80,19 @@ Item {
         repeat: true
         running: true
         onTriggered: updatePrice()
+    }
+
+    Timer {
+        id: requestTimeoutWatchdog
+        interval: 20000 // 20 seconds fallback timeout
+        repeat: false
+        running: false
+        onTriggered: {
+            console.error("AP6C: Watchdog triggered — request likely failed silently");
+            price = "E";
+            inErrorState = true;
+            retry.start();
+        }
     }
 
     Component.onCompleted: updatePrice()
