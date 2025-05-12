@@ -318,7 +318,7 @@ Item {
 
                 Label {
                     Layout.minimumWidth: root.width / 2
-                    text: i18n("2.3    (2025-05-03)")
+                    text: i18n("2.4    (2025-05-12)")
                 }
 
             }  // Closing GridLayout
