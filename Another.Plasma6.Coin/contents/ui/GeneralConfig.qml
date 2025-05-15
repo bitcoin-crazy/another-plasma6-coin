@@ -321,6 +321,18 @@ Item {
                     text: i18n("2.4    (2025-05-12)")
                 }
 
+                // Website
+                Label {
+                    Layout.minimumWidth: root.width / 2
+                    text: i18n("AP6 Coin, website:")
+                    horizontalAlignment: Label.AlignRight
+                }
+
+                Label {
+                    Layout.minimumWidth: root.width / 2
+                    text: "https://github.com/bitcoin-crazy/"
+                }
+
             }  // Closing GridLayout
         }      // Closing ColumnLayout
     }          // Closing ScrollView
