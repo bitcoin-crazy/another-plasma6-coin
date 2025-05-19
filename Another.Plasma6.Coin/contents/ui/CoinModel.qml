@@ -28,6 +28,7 @@ ListModel {
     ListElement { name: "COMP" }
     ListElement { name: "CRV" }
     ListElement { name: "DAI" }
+    ListElement { name: "DASH" }
     ListElement { name: "DEXE" }
     ListElement { name: "DOGE" }
     ListElement { name: "DOT" }
