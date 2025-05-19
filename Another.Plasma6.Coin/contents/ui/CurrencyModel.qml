@@ -5,6 +5,7 @@ ListModel {
     ListElement { name: "US Dollar Circle" ;             abbreviation: "USDC" }
     ListElement { name: "Bitcoin" ;                      abbreviation: "BTC" }
     ListElement { name: "Ethereum" ;                     abbreviation: "ETH" }
+    ListElement { name: "Binance Coin" ;                 abbreviation: "BNB" }
     ListElement { name: "Argentine Peso" ;               abbreviation: "ARS" }
     ListElement { name: "Australian Dollar" ;            abbreviation: "AUD" }
     ListElement { name: "Brazilian Real" ;               abbreviation: "BRL" }
