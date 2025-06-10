@@ -59,10 +59,14 @@ ColumnLayout {
         coinName: Plasmoid.configuration.coinName
         currencyAbbreviation: Plasmoid.configuration.currency
         refreshRate: Plasmoid.configuration.timeRefresh || 3 // Integrating the refresh rate configuration
+        visible: Plasmoid.configuration.enabled
     }
 
     // Determine which price text should be shown with multiplier applied
     property string displayedPrice: {
+        if (!Plasmoid.configuration.enabled) {
+            return "X";
+        }
         if (getApi.price === "E") {
             return "Err";
         }
@@ -76,8 +80,20 @@ ColumnLayout {
     }
 
     Text {
+        id: disabledText
+        visible: !Plasmoid.configuration.enabled
+        width: wrapper.width
+        font.pixelSize: pixelFontVar
+        font.bold: true
+        color: Plasmoid.configuration.textColor || Kirigami.Theme.textColor
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        text: "X"
+    }
+
+    Text {
         id: coinNameText
-        visible: Plasmoid.configuration.showCoinName
+        visible: Plasmoid.configuration.showCoinName && Plasmoid.configuration.enabled
         width: wrapper.width
         font.pixelSize: pixelFontVar2
         color: {
@@ -95,7 +111,7 @@ ColumnLayout {
 
     Text {
         id: coinPairText
-        visible: Plasmoid.configuration.showPair
+        visible: Plasmoid.configuration.showPair && Plasmoid.configuration.enabled
         width: wrapper.width
         font.pixelSize: pixelFontVar2
         color: {
@@ -113,6 +129,7 @@ ColumnLayout {
 
     Text {
         id: priceText
+        visible: Plasmoid.configuration.enabled
         width: wrapper.width
         font.pixelSize: pixelFontVar
         color: {
@@ -139,6 +156,7 @@ ColumnLayout {
 
     MouseArea {
         anchors.fill: priceText
+        enabled: Plasmoid.configuration.enabled
         onClicked: {
             getApi.updatePrice(); // Update price when clicking
             fadeAnimation.start();
@@ -171,7 +189,7 @@ ColumnLayout {
         id: autoUpdateTimer
         interval: Plasmoid.configuration.timeRefresh * 60000 // Convert from minutes to milliseconds
         repeat: true
-        running: true
+        running: Plasmoid.configuration.enabled
         onTriggered: {
             getApi.updatePrice(); // Trigger price update based on configured interval
             if (Plasmoid.configuration.blinkRefresh) {

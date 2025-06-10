@@ -6,6 +6,9 @@
   <kcfgfile name=""/>
 
   <group name="General">
+    <entry name="enabled" type="bool">
+      <default>true</default>
+    </entry>
     <entry name="fontSize" type="int">
       <default>15</default>
     </entry>

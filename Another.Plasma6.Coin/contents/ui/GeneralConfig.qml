@@ -30,6 +30,7 @@ Item {
         property var showPair
     }
 
+    property alias cfg_enabled: enabledCheckBox.checked
     property alias cfg_fontSize: fontsizedefault.value
     property alias cfg_textBold: boldTextCkeck.checked
     property alias cfg_coinName: cryptoValue.coinName
@@ -59,6 +60,21 @@ Item {
                 Layout.minimumWidth: preferredWidth
                 Layout.maximumWidth: preferredWidth
                 columns: 2
+
+                // Enabled
+                Label {
+                    Layout.minimumWidth: root.width / 2
+                    text: i18n("Enabled:")
+                    horizontalAlignment: Label.AlignRight
+                }
+                CheckBox {
+                    id: enabledCheckBox
+                    text: i18n("")
+                    checked: cfg_enabled
+                    onCheckedChanged: { configurationChanged() }
+                    ToolTip.visible: hovered
+                    ToolTip.text: i18n("Enable or disable the applet. If disabled, a \"X\" will be displayed.")
+                }
 
                 // Font size
                 Label {
