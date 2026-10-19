@@ -42,6 +42,7 @@ Item {
     property alias cfg_useThousandsSeparator: thousandsSeparatorCheckBox.checked
     property alias cfg_swapCommasDots: swapCommasDotsCheckBox.checked
     property alias cfg_textColor: textColorField.text
+    property alias cfg_errorColor: errorColorField.text
     property alias cfg_timeRefresh: timeRefreshSpinBox.value
     property alias cfg_blinkRefresh: blinkRefreshCheckBox.checked
 
@@ -70,7 +71,6 @@ Item {
                 CheckBox {
                     id: enabledCheckBox
                     text: i18n("")
-                    checked: cfg_enabled
                     onCheckedChanged: { configurationChanged() }
                     ToolTip.visible: hovered
                     ToolTip.text: i18n("Enable or disable the applet. If disabled, a \"X\" will be displayed.")
@@ -207,7 +207,7 @@ Item {
                     id: decimalPlacesSpinBox
                     from: 0
                     to: 10
-                    value: 2
+                    value: 0
                     stepSize: 1
                     onValueChanged: configurationChanged()
                 }
@@ -270,11 +270,7 @@ Item {
                 CheckBox {
                     id: swapCommasDotsCheckBox
                     text: i18n("")
-                    checked: cfg_swapCommasDots
-                    onCheckedChanged: {
-                        configurationChanged()
-                        cfg_swapCommasDots = checked
-                    }
+                    onCheckedChanged: configurationChanged()
                     ToolTip.visible: hovered
                     ToolTip.text: i18n("Swap commas for dots and vice-versa to match usage in each country.")
                 }
@@ -287,10 +283,24 @@ Item {
                 }
                 TextField {
                     id: textColorField
-                    text: "#000000"
+                    text: ""
                     onTextChanged: configurationChanged()
                     ToolTip.visible: hovered
                     ToolTip.text: i18n("Use color names (red, yellowgreen) or HEX code (#ffff00 for yellow). Leave empty to use the theme's default color. Tips in README at https://github.com/bitcoin-crazy/another-plasma6-coin")
+                }
+
+                // Error Color
+                Label {
+                    Layout.minimumWidth: root.width / 2
+                    text: i18n("Error Color:")
+                    horizontalAlignment: Label.AlignRight
+                }
+                TextField {
+                    id: errorColorField
+                    text: ""
+                    onTextChanged: configurationChanged()
+                    ToolTip.visible: hovered
+                    ToolTip.text: i18n("Color of the text when an error occurs (Err). Use color names (red, orange) or HEX code (#ff0000). Leave empty to use the theme's default error color.")
                 }
 
                 // Time Refresh
@@ -303,7 +313,7 @@ Item {
                     id: timeRefreshSpinBox
                     from: 1
                     to: 60
-                    value: 10
+                    value: 3
                     stepSize: 1
                     onValueChanged: configurationChanged()
                     ToolTip.visible: hovered
@@ -334,7 +344,7 @@ Item {
 
                 Label {
                     Layout.minimumWidth: root.width / 2
-                    text: i18n("2.4    (2025-05-12)")
+                    text: i18n("2.5    (2026-10-15)")
                 }
 
                 // Website

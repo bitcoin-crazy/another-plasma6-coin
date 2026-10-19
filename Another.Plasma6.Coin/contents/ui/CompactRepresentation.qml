@@ -18,7 +18,9 @@ ColumnLayout {
     property int pixelFontVar2: pixelFontVar * 0.7
     property int heightroot: 20
 
-    // Function for thousands separator
+    // Function for thousands separator and decimal mark.
+    // The thousands separator is applied to the integer part only; applying it
+    // to the whole string would also split the decimals (1,234.5,678).
     function formatPrice(price) {
         // Ensure price is always a number
         let numPrice = parseFloat(price);
@@ -28,27 +30,18 @@ ColumnLayout {
             return price; // Return original value if not a valid number
         }
 
-        // Apply thousand separator if needed
-        let formattedPrice = numPrice.toFixed(Plasmoid.configuration.decimalPlaces);
+        const parts = numPrice.toFixed(Plasmoid.configuration.decimalPlaces).split(".");
+        let intPart = parts[0];
+        const decPart = parts.length > 1 ? parts[1] : "";
 
-        // If swapCommasDots is enabled, swap commas and dots
-        if (Plasmoid.configuration.swapCommasDots) {
-            // Swap the dot in the decimal place to a comma
-            formattedPrice = formattedPrice.replace('.', ',');
+        // swapCommasDots: dot as decimal mark and comma as thousands separator are swapped
+        const swap = Plasmoid.configuration.swapCommasDots;
 
-            // Apply thousands separator using a dot (if thousands separator is enabled)
-            if (Plasmoid.configuration.useThousandsSeparator) {
-                formattedPrice = formattedPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-            }
-        } else {
-            // If swapCommasDots is not enabled, apply thousands separator with dot
-            if (Plasmoid.configuration.useThousandsSeparator) {
-                formattedPrice = formattedPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            }
+        if (Plasmoid.configuration.useThousandsSeparator) {
+            intPart = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, swap ? "." : ",");
         }
 
-        // Return the formatted price
-        return formattedPrice;
+        return decPart !== "" ? intPart + (swap ? "," : ".") + decPart : intPart;
     }
 
     Layout.minimumWidth: coinNameText.implicitWidth + pixelFontVar * 4
@@ -59,7 +52,26 @@ ColumnLayout {
         coinName: Plasmoid.configuration.coinName
         currencyAbbreviation: Plasmoid.configuration.currency
         refreshRate: Plasmoid.configuration.timeRefresh || 3 // Integrating the refresh rate configuration
-        visible: Plasmoid.configuration.enabled
+        active: Plasmoid.configuration.enabled
+        visible: false // Not a visual item: keep it out of the layout
+
+        onAutoUpdateTriggered: {
+            if (Plasmoid.configuration.blinkRefresh) {
+                fadeAnimation.start();
+            }
+        }
+    }
+
+    // Any error (invalid pair, network, timeout, server) shows "Err".
+    // No old price is ever displayed after a failure.
+    readonly property bool showErr: getApi.inErrorState
+
+    // One place to decide the color of all texts
+    readonly property color currentTextColor: {
+        if (showErr) {
+            return Plasmoid.configuration.errorColor || Kirigami.Theme.negativeTextColor;
+        }
+        return Plasmoid.configuration.textColor || Kirigami.Theme.textColor;
     }
 
     // Determine which price text should be shown with multiplier applied
@@ -67,14 +79,16 @@ ColumnLayout {
         if (!Plasmoid.configuration.enabled) {
             return "X";
         }
-        if (getApi.price === "E") {
+        if (showErr) {
             return "Err";
         }
         if (getApi.price !== null && !isNaN(getApi.price)) {
             // Apply price multiplier from configuration
-            var price = parseFloat(getApi.price);
-            var multiplier = Plasmoid.configuration.priceMultiplier || 1; // Default to 1 if multiplier is not set
-            return formatPrice((price * multiplier).toFixed(Plasmoid.configuration.decimalPlaces));
+            var multiplier = parseFloat(Plasmoid.configuration.priceMultiplier);
+            if (isNaN(multiplier)) {
+                multiplier = 1; // Empty or invalid multiplier: ignore it
+            }
+            return formatPrice(getApi.price * multiplier);
         }
         return "?";
     }
@@ -96,12 +110,7 @@ ColumnLayout {
         visible: Plasmoid.configuration.showCoinName && Plasmoid.configuration.enabled
         width: wrapper.width
         font.pixelSize: pixelFontVar2
-        color: {
-            if (displayedPrice === "Err") {
-                return Plasmoid.configuration.errorColor || Kirigami.Theme.negativeTextColor;
-            }
-            return Plasmoid.configuration.textColor || Kirigami.Theme.textColor;
-        }
+        color: currentTextColor
         font.bold: Plasmoid.configuration.textBold
         font.capitalization: Font.AllUppercase
         text: Plasmoid.configuration.coinName + (Plasmoid.configuration.priceMultiplier !== "1" && Plasmoid.configuration.priceMultiplier !== "" ? "*" : "")
@@ -114,12 +123,7 @@ ColumnLayout {
         visible: Plasmoid.configuration.showPair && Plasmoid.configuration.enabled
         width: wrapper.width
         font.pixelSize: pixelFontVar2
-        color: {
-            if (displayedPrice === "Err") {
-                return Plasmoid.configuration.errorColor || Kirigami.Theme.negativeTextColor;
-            }
-            return Plasmoid.configuration.textColor || Kirigami.Theme.textColor;
-        }
+        color: currentTextColor
         font.bold: Plasmoid.configuration.textBold
         font.capitalization: Font.AllUppercase
         text: Plasmoid.configuration.coinName + "/" + Plasmoid.configuration.currency.toUpperCase() + (Plasmoid.configuration.priceMultiplier !== "1" && Plasmoid.configuration.priceMultiplier !== "" ? "*" : "")
@@ -132,12 +136,7 @@ ColumnLayout {
         visible: Plasmoid.configuration.enabled
         width: wrapper.width
         font.pixelSize: pixelFontVar
-        color: {
-            if (displayedPrice === "Err") {
-                return Plasmoid.configuration.errorColor || Kirigami.Theme.negativeTextColor;
-            }
-            return Plasmoid.configuration.textColor || Kirigami.Theme.textColor;
-        }
+        color: currentTextColor
         font.bold: Plasmoid.configuration.textBold
         font.capitalization: Font.AllUppercase
         text: displayedPrice
@@ -163,39 +162,11 @@ ColumnLayout {
         }
     }
 
-    // Simple color animation for visual feedback
-    ColorAnimation {
-        id: priceFlash
-        target: priceText
-        property: "color"
-        from: Kirigami.Theme.highlightColor
-        to: {
-            if (displayedPrice === "Err") {
-                return Plasmoid.configuration.errorColor || Kirigami.Theme.negativeTextColor;
-            }
-            return Plasmoid.configuration.textColor || Kirigami.Theme.textColor;
-        }
-        duration: 1000
-    }
-
     SequentialAnimation {
         id: fadeAnimation
         running: false
         PropertyAnimation { target: priceText; property: "opacity"; to: 0.0; duration: 500 }
         PropertyAnimation { target: priceText; property: "opacity"; to: 1.0; duration: 500 }
-    }
-
-    Timer {
-        id: autoUpdateTimer
-        interval: Plasmoid.configuration.timeRefresh * 60000 // Convert from minutes to milliseconds
-        repeat: true
-        running: Plasmoid.configuration.enabled
-        onTriggered: {
-            getApi.updatePrice(); // Trigger price update based on configured interval
-            if (Plasmoid.configuration.blinkRefresh) {
-                fadeAnimation.start();
-            }
-        }
     }
 
     spacing: 0
