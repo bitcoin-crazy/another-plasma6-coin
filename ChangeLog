@@ -1,3 +1,20 @@
+Version x.x - ???
+X * Added XXX new coins.
+  * Added a website reference on UI.
+  * Added Enabled option.
+  * Added the Error Color option, used when 'Err' is displayed. Empty uses the
+    theme's default error color.
+  * Configuration window: default values now match the real defaults; removed
+    circular bindings.
+  * Fixed answers arriving out of order (a slow answer for the old coin could
+    replace the new price).
+  * Fixed duplicated requests: each refresh cycle was querying Binance twice.
+  * Fixed the thousands separator being applied to decimal places (1,234.5,678)
+    when using 4 or more decimal places.
+  * Removed unused code.
+  * Startup and pair changes now trigger a single request instead of up to
+    three.
+
 Version 2.4 - 2025-05-12
   * Added 36 new coins. Current total: 119 coins.
   * Added a timeout to declare lost connection, displaying ERR for this event.
