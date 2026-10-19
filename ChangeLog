@@ -15,6 +15,7 @@ X * Added XXX new coins.
   * Removed unused code.
   * Startup and pair changes now trigger a single request instead of up to
     three.
+  * Updated README.md.
 
 Version 2.4 - 2025-05-12
   * Added 36 new coins. Current total: 119 coins.

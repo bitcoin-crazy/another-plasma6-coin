@@ -6,11 +6,11 @@
 <br>![Example of toolbar](screenshots/toolbar2.png)<br><br>
 <br>![Example of toolbar](screenshots/toolbar3.png)<br><br>
 
-__Another Plasma6 Coin__ is a Plasma 6 (KDE) applet to show the price of Bitcoin and other cryptocurrencies in KDE toolbar.
+__Another Plasma6 Coin__ is a Plasma 6 (KDE) applet to show the price of Bitcoin and other cryptocurrencies in the KDE toolbar.
 
 This program was initially based on [Plasma Coin 1.0.2](https://store.kde.org/p/2242677/), written by [zayronXIO](https://store.kde.org/u/zayronXIO).
 
-I am an anonymous programmer and I developed this applet for my personal utilization. Feel free to send pull requests.
+I am an anonymous programmer and I developed this applet for my personal use. Feel free to send pull requests.
 
 > [!NOTE]
 > This applet is available at [KDE Store](https://store.kde.org/p/2280323).
@@ -23,7 +23,7 @@ Binance API x CoinGecko API:
 
 * Binance API is faster than CoinGecko API.
 * Binance API has less limitations. You can access several pairs of coins at the same time.
-* In April 18, 2025, CoinGecko API was providing 100 coins under USD[1], while Binance had 573 under USDT[2].
+* On April 18, 2025, CoinGecko API was providing 100 coins under USD[1], while Binance had 573 under USDT[2].
 
 ```
 [1] $ curl -s 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd' | tr ',' '\n' | grep '"id":' | wc -l
@@ -35,12 +35,12 @@ If you are interested in CoinGecko, see the branch [`ap6c-1.2.1-coingecko-archiv
 This applet displays coin prices in the toolbar and includes the following features:
 
 * Price updates every x minutes, where x is a number between 1 and 60.
-* Retry after 1 minute if the last update fails.
+* Retry after 1 minute if the last update fails (except when Binance rejects the pair).
 * Immediate price update when clicking on it.
 * Support for decimal places.
 * Option to display the coin name, the coin and currency pair, or neither.
 * Option to apply colors to prices.
-* Option to use a customizable thousands separator.
+* Option to use a thousands separator.
 * Option to apply a price multiplier.
 * The `ERR` (Error) message is shown when an invalid coin pair is selected or another error occurs.
 
@@ -59,7 +59,7 @@ The best way to install this applet is via widget manager from KDE.
 
 ### Importing the tarball
 
-Another way to install __Another Plasma6 Coin__ is to make it importing the tarball.
+Another way to install __Another Plasma6 Coin__ is to import the tarball.
 
 1. Download the final tarball `Another.Plasma6.Coin-<version>.tar.xz`
 2. Right-Click over the toolbar and select `Add or Manage Widgets`.
@@ -71,7 +71,7 @@ Another way to install __Another Plasma6 Coin__ is to make it importing the tarb
 
 ### Manual install
 
-Another way to install __Another Plasma6 Coin__ is to make it manually.
+Another way to install __Another Plasma6 Coin__ is to do it manually.
 
 1. Copy the directory `Another.Plasma6.Coin` to `~/.local/share/plasma/plasmoids/`
 2. Run `$ kquitapp6 plasmashell && kstart plasmashell` or restart KDE.
@@ -90,16 +90,17 @@ There are some options in `Configuration` window.
 * `From Crypto` will select the cryptocurrency, and `To Crypto/Currency` will select the pair to be used.
 * `Show Coin Name` and `Show Pair`: only one of these can be selected, but both can be unselected.
 * `Decimal Places` is for fractional numbers.
-* `Price Multiplier` allows the user to add an integer or a fractional number to multiply the current price. Up to 8 decimal places can be used. An asterisk will be placed near of the coin/pair name to symbolize the use of this feature. E.g. BTC/USDT* See more details below in the section _When to use Price Multiplier?_
-* `Thousands Separator` add commas to separate the thousands in the price.
+* `Price Multiplier` allows the user to add an integer or a fractional number to multiply the current price. Up to 8 decimal places can be used. An asterisk will be placed near the coin/pair name to symbolize the use of this feature. E.g. BTC/USDT* See more details below in the section _When to use Price Multiplier?_
+* `Thousands Separator` adds commas to separate the thousands in the price.
 * `Swap commas-dots` swaps commas for dots and vice-versa to match usage in each country. E.g., from 1,000.23 to 1.000,23
 * `Text Color` allows the user to choose a color for the price. If empty, the default theme color will be used. It is possible to use a color name (like `yellow`, `yellowgreen`) or a hex color code (like `#00ff00` or `#00FF00`). The character "`#`" is mandatory for hex colors. There is a color name table available [here](https://doc.qt.io/qt-6/qml-color.html#svg-color-reference). To choose a hex color, use the KColorChooser program, available on KDE Plasma 6.
+* `Error Color` allows the user to choose the color of the text when the `ERR` message is shown. It accepts the same formats as `Text Color`. If empty, the default error color of the theme will be used.
 * `Time Refresh` sets the time in minutes to auto-refresh the price. This is a value between 1 and 60.
-* `Blink Refresh` defines if the price will blink when refreshing (automatically or via click).
+* `Blink Refresh` defines if the price will blink when refreshing (automatically or via click). It is enabled by default.
 
 ## When to use Price Multiplier?
 
-The Price Multiplier is a feature that allows you to multiply the current price by an integer or fractional number. You can use up to four decimal places, such as 1.3125. An asterisk will appear next to the coin/pair name to indicate that this feature is in use. For example: BTC/USDT*.
+The Price Multiplier is a feature that allows you to multiply the current price by an integer or fractional number. You can use up to eight decimal places, such as 1.3125. An asterisk will appear next to the coin/pair name to indicate that this feature is in use. For example: BTC/USDT*.
 
 This feature is useful in two scenarios:
 
@@ -111,10 +112,10 @@ This feature is useful in two scenarios:
 
 ### New coins and currencies
 
-__Another Plasma6 Coin__ arrives with a limited number of coins and currencies. It is possible to add new items.
+__Another Plasma6 Coin__ comes with a limited number of coins and currencies. It is possible to add new items.
 
 > [!IMPORTANT]
-> All prices are taken from [Binance](https://www.binance.com) via API, so is needed to use the same names from Binance.
+> All prices are taken from [Binance](https://www.binance.com) via API, so you must use the same names as Binance.
 
 * For coins:
   * Edit `~/.local/share/plasma/plasmoids/Another.Plasma6.Coin/contents/ui/CoinModel.qml` and add a new entry.
@@ -133,10 +134,10 @@ __Another Plasma6 Coin__ arrives with a limited number of coins and currencies. 
     ```
     ListElement { name: "British Pound" ; abbreviation: "GBP" }
     ```
-  * In the last example, `British Pound` is a name to visual identification of the currency in configuration block. `GBP` will be used to call the Binance API and to compose the pair name in the KDE toolbar.
+  * In the last example, `British Pound` is a name used to identify the currency visually in the configuration block. `GBP` will be used to call the Binance API and to compose the pair name in the KDE toolbar.
   * It is not needed to restart KDE after adding new currencies.
 
-__TIP1:__ The Binance API provides a restricted number of coins. It is possible to get a list using the  `curl` command.
+__TIP1:__ The Binance API provides a restricted number of coins. It is possible to get a list using the `curl` command.
 
   ```
   $ curl -s https://api.binance.com/api/v3/ticker/price | tr '{' '\n' | egrep '[A-Z]USDT'
