@@ -49,7 +49,7 @@
       <default>3</default>
     </entry>
     <entry name="blinkRefresh" type="bool">
-      <default>false</default>
+      <default>true</default>
     </entry>
   </group>
 

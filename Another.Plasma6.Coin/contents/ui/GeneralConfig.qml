@@ -329,7 +329,7 @@ Item {
                 CheckBox {
                     id: blinkRefreshCheckBox
                     text: i18n("")
-                    checked: false
+                    checked: true
                     onCheckedChanged: configurationChanged()
                     ToolTip.visible: hovered
                     ToolTip.text: i18n("Blink the price when it refreshes.")

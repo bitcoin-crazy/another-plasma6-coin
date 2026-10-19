@@ -4,6 +4,7 @@ X * Added XXX new coins.
   * Added Enabled option.
   * Added the Error Color option, used when 'Err' is displayed. Empty uses the
     theme's default error color.
+  * Blink Refresh is now enabled by default.
   * Configuration window: default values now match the real defaults; removed
     circular bindings.
   * Fixed answers arriving out of order (a slow answer for the old coin could
