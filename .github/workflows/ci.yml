@@ -11,10 +11,16 @@ permissions:
 
 jobs:
   checks:
-    name: Consistency and logic checks
-    runs-on: ubuntu-latest
+    name: Consistency and logic checks (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # ubuntu-latest will point to Ubuntu 26.04 between 2026-10-19 and 2026-11-19.
+        # Both are tested explicitly until then; ubuntu-latest can be used again after.
+        os: [ubuntu-24.04, ubuntu-26.04]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Configuration is consistent (main.xml, GeneralConfig.qml, QML files)
         run: python3 .github/scripts/check_config.py
