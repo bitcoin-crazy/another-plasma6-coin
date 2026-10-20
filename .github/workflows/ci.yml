@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Consistency and logic checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configuration is consistent (main.xml, GeneralConfig.qml, QML files)
+        run: python3 .github/scripts/check_config.py
+
+      - name: Version is the same everywhere (metadata.json, ChangeLog, Configuration window)
+        run: python3 .github/scripts/check_version.py
+
+      - name: Logic tests (price format and user coins)
+        run: node --test .github/tests/logic.test.js
