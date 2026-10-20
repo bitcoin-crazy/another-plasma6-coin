@@ -42,6 +42,7 @@ This applet displays coin prices in the toolbar and includes the following featu
 * Option to apply colors to prices.
 * Option to use a thousands separator.
 * Option to apply a price multiplier.
+* Optional file with your own coins. See _Your own coins_ below.
 * The `ERR` (Error) message is shown when an invalid coin pair is selected or another error occurs.
 
 ## How to install
@@ -158,6 +159,22 @@ __TIP2:__ It is possible to make tests against the Binance API using the `curl` 
   ```
 
 The errors from Binance API are very comprehensive. Read carefully each message returned at the shell prompt.
+
+### Your own coins
+
+The changes made in `CoinModel.qml` are lost when the applet is updated. To keep your own coins, create the file `~/.ap6c.CoinModel`, using the same format of `CoinModel.qml`. For example:
+
+```
+ListElement { name: "PEPE" }
+ListElement { name: "TRX" }
+```
+
+* The coins from this file are added to the end of the `From Crypto` list.
+* The file is read when the `Configuration` window is opened. It is not needed to restart KDE.
+* Only the lines with `ListElement { name: "..." }` are used. Other lines are ignored. Comments with `//` and `/* */` are allowed.
+* Names are converted to uppercase. Only letters and numbers are accepted (up to 20 characters). Names that are already in the list are ignored.
+* If the file does not exist, nothing happens.
+* The same rule of __TIP1__ applies: you must use the same name provided by Binance.
 
 ### Crypto/Currency names size
 

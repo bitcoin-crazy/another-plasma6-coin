@@ -8,6 +8,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts 1.11
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.plasma5support as P5Support
 
 Item {
     id: configRoot
@@ -16,6 +17,68 @@ Item {
 
     CoinModel {
         id: coinModel
+    }
+
+    // The user's own coins, from an optional file with the same format as CoinModel.qml.
+    // They are added at the end of the list. See README.md, "Your own coins".
+    readonly property int userCoinsMaxBytes: 65536
+    readonly property int userCoinsMaxCount: 500
+
+    // Pure function: returns the new coin names found in 'text', in file order.
+    // 'knownNames' is an array of names that must not be repeated.
+    // Only 'ListElement { name: "..." }' is read; // and /* */ comments are ignored.
+    // Names must be letters and numbers only, so they are always safe to use in the API URL.
+    function parseUserCoins(text, knownNames, maxCount) {
+        const seen = {};
+        for (let i = 0; i < knownNames.length; i++) {
+            seen[String(knownNames[i]).toUpperCase()] = true;
+        }
+        const clean = String(text).replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
+        const re = /ListElement\s*\{\s*name\s*:\s*"([^"]*)"\s*\}/g;
+        const result = [];
+        let m;
+        while ((m = re.exec(clean)) !== null && result.length < maxCount) {
+            const name = m[1].trim().toUpperCase();
+            if (!/^[A-Z0-9]{1,20}$/.test(name) || seen[name]) {
+                continue;
+            }
+            seen[name] = true;
+            result.push(name);
+        }
+        return result;
+    }
+
+    function addUserCoins(text) {
+        const known = [];
+        for (let i = 0; i < coinModel.count; i++) {
+            known.push(coinModel.get(i).name);
+        }
+        const names = parseUserCoins(text, known, userCoinsMaxCount);
+        for (let i = 0; i < names.length; i++) {
+            coinModel.append({ name: names[i] });
+        }
+        // The saved coin may be one of the user's coins, which was not in the list yet
+        if (names.length > 0) {
+            const index = nameFromCrypto.indexOfValue(cryptoValue.coinName);
+            if (index >= 0) {
+                nameFromCrypto.currentIndex = index;
+            }
+        }
+    }
+
+    // Reads ~/.ap6c.CoinModel, if it exists.
+    // If the file is missing or this fails, nothing happens: the built-in list is used.
+    P5Support.DataSource {
+        id: userCoinsReader
+        engine: "executable"
+        connectedSources: []
+        onNewData: (sourceName, data) => {
+            disconnectSource(sourceName);
+            if (data["exit code"] === 0) {
+                addUserCoins(data["stdout"]);
+            }
+        }
+        Component.onCompleted: connectSource("head -c " + userCoinsMaxBytes + " \"$HOME/.ap6c.CoinModel\"")
     }
 
     CurrencyModel {
@@ -127,7 +190,7 @@ Item {
                     }
                     Component.onCompleted: currentIndex = indexOfValue(cryptoValue.coinName)
                     ToolTip.visible: hovered
-                    ToolTip.text: i18n("More coins? See the README at https://github.com/bitcoin-crazy/another-plasma6-coin")
+                    ToolTip.text: i18n("More coins? See the README at https://github.com/bitcoin-crazy/another-plasma6-coin (section Your own coins)")
                 }
 
                 // To Crypto with tooltip
