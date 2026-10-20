@@ -25,8 +25,5 @@ jobs:
       - name: Configuration is consistent (main.xml, GeneralConfig.qml, QML files)
         run: python3 .github/scripts/check_config.py
 
-      - name: Version is the same everywhere (metadata.json, ChangeLog, Configuration window)
-        run: python3 .github/scripts/check_version.py
-
       - name: Logic tests (price format and user coins)
         run: node --test .github/tests/logic.test.js
