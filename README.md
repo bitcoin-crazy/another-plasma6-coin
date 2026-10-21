@@ -121,7 +121,9 @@ This feature is useful in two scenarios:
 __Another Plasma6 Coin__ comes with a limited number of coins and currencies. It is possible to add new items.
 
 > [!IMPORTANT]
-> All prices are taken from [Binance](https://www.binance.com) via API, so you must use the same names as Binance.
+> Prices are taken from the selected provider (Binance or Coinbase via API), so you must use the same names as the provider you selected in `Price Provider`.
+
+#### For Binance:
 
 * For coins:
   * Edit `~/.local/share/plasma/plasmoids/Another.Plasma6.Coin/contents/ui/CoinModel.qml` and add a new entry.
@@ -143,7 +145,7 @@ __Another Plasma6 Coin__ comes with a limited number of coins and currencies. It
   * In the last example, `British Pound` is a name used to identify the currency visually in the configuration block. `GBP` will be used to call the Binance API and to compose the pair name in the KDE toolbar.
   * It is not needed to restart KDE after adding new currencies.
 
-__TIP1:__ The Binance API provides a restricted number of coins. It is possible to get a list using the `curl` command.
+__TIP1 (Binance):__ The Binance API provides a restricted number of coins. It is possible to get a list using the `curl` command.
 
   ```
   $ curl -s https://api.binance.com/api/v3/ticker/price | tr '{' '\n' | egrep '[A-Z]USDT'
@@ -157,13 +159,31 @@ It is also possible to get a list of available currencies for BTC and USDT:
   $ curl -s https://api.binance.com/api/v3/ticker/price | tr '{' '\n' | egrep '"(BTC|USDT)' | sort
   ```
 
-__TIP2:__ It is possible to make tests against the Binance API using the `curl` command. See an example for BTC/USDT:
+__TIP2 (Binance):__ It is possible to make tests against the Binance API using the `curl` command. See an example for BTC/USDT:
 
   ```
   $ curl -s https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT
   ```
 
 The errors from Binance API are very comprehensive. Read carefully each message returned at the shell prompt.
+
+#### For Coinbase:
+
+Only real Coinbase pairs work. Pairs that do not exist on Coinbase will show `Err`. The available coins and currencies are limited to those offered by Coinbase. It is not possible to add custom coins or currencies from Coinbase through the UI.
+
+__TIP3 (Coinbase):__ Get the list of available products (coin-currency pairs):
+
+  ```
+  $ curl -s https://api.exchange.coinbase.com/products | jq '.[] | .id' | sort
+  ```
+
+Examples: `BTC-USD`, `ETH-USD`, `SOL-USD`.
+
+__TIP4 (Coinbase):__ Test against the Coinbase API using `curl`:
+
+  ```
+  $ curl -s https://api.exchange.coinbase.com/products/BTC-USD
+  ```
 
 ### Your own coins
 
