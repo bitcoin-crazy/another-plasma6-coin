@@ -21,6 +21,9 @@
     <entry name="currency" type="string">
       <default>USDT</default>
     </entry>
+    <entry name="priceProvider" type="string">
+      <default>binance</default>
+    </entry>
     <entry name="showCoinName" type="bool">
       <default>true</default>
     </entry>

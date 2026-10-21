@@ -7,6 +7,9 @@ X * Added XXX new coins.
   * Added Enabled option.
   * Added the Error Color option, used when 'Err' is displayed. Empty uses the
     theme's default error color.
+  * Added the Price Provider option: Binance (default) or Coinbase. Useful where
+    Binance is blocked.
+  * Added USD to the currency list (Coinbase only).
   * Blink Refresh is now enabled by default.
   * Created CI tests for GitHub.
   * Configuration window: default values now match the real defaults; removed

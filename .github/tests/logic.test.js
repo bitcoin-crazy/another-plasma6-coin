@@ -36,6 +36,14 @@ const parseUserCoins = new Function(
   `return ${extractFunction('GeneralConfig.qml', 'parseUserCoins')};`
 )();
 
+// Price providers (GetAPI.qml): the functions call each other, so they are loaded together.
+const providers = new Function(
+  ['normalizeProvider', 'providerLabel', 'buildUrl', 'parsePrice', 'isPairRejected']
+    .map((name) => extractFunction('components/GetAPI.qml', name))
+    .join('\n') +
+    '\nreturn { normalizeProvider, providerLabel, buildUrl, parsePrice, isPairRejected };'
+)();
+
 // ---------------------------------------------------------------- formatPrice
 
 const cfg = (decimalPlaces, thousands, swap) => ({
@@ -162,4 +170,62 @@ test('parseUserCoins: empty or missing text, and the limit of coins', () => {
   assert.deepEqual(parse(undefined), []);
   const many = Array.from({ length: 10 }, (_, i) => `ListElement { name: "C${i}" }`).join('\n');
   assert.deepEqual(parse(many, 3), ['C0', 'C1', 'C2']);
+});
+
+// ------------------------------------------------------------------ providers
+
+const BINANCE_BODY = '{"symbol":"BTCUSDT","price":"67890.12000000"}';
+const COINBASE_BODY = '{"trade_id":123,"price":"67890.12","size":"0.01","bid":"67890.11","ask":"67890.13"}';
+
+test('providers: URL of each provider', () => {
+  assert.equal(providers.buildUrl('binance', 'BTC', 'USDT'), 'https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
+  assert.equal(providers.buildUrl('coinbase', 'BTC', 'USD'), 'https://api.exchange.coinbase.com/products/BTC-USD/ticker');
+});
+
+test('providers: unknown or empty provider is Binance', () => {
+  for (const name of ['', undefined, null, 'kraken', 'COINBASE', 'Binance']) {
+    assert.equal(providers.normalizeProvider(name), 'binance', String(name));
+    assert.match(providers.buildUrl(name, 'BTC', 'USDT'), /^https:\/\/api\.binance\.com\//);
+  }
+  assert.equal(providers.providerLabel('coinbase'), 'Coinbase');
+  assert.equal(providers.providerLabel('x'), 'Binance');
+});
+
+test('providers: names that could change the URL are encoded', () => {
+  assert.ok(!providers.buildUrl('binance', 'BTC&x=1', 'USDT').includes('&x=1'));
+  assert.ok(!providers.buildUrl('coinbase', 'A/../B', 'USD').includes('/../'));
+  assert.ok(!providers.buildUrl('coinbase', 'BTC', 'USD?x=1').includes('?'));
+});
+
+test('providers: price is read from the answer of each provider', () => {
+  assert.equal(providers.parsePrice('binance', BINANCE_BODY), 67890.12);
+  assert.equal(providers.parsePrice('coinbase', COINBASE_BODY), 67890.12);
+});
+
+test('providers: an answer without a price is NaN (never an old or wrong price)', () => {
+  const bodies = ['{}', 'null', '[]', '"x"', '123', '{"price":"abc"}', '{"data":{"amount":"67890.12"}}', '{"message":"NotFound"}'];
+  for (const provider of ['binance', 'coinbase']) {
+    for (const body of bodies) {
+      assert.ok(Number.isNaN(providers.parsePrice(provider, body)), `${provider} ${body}`);
+    }
+  }
+});
+
+test('providers: text that is not JSON throws an error', () => {
+  for (const provider of ['binance', 'coinbase']) {
+    assert.throws(() => providers.parsePrice(provider, '<html>Service unavailable</html>'));
+    assert.throws(() => providers.parsePrice(provider, ''));
+  }
+});
+
+test('providers: which HTTP status means "this pair does not exist"', () => {
+  assert.equal(providers.isPairRejected('binance', 400), true);
+  assert.equal(providers.isPairRejected('binance', 404), false);
+  assert.equal(providers.isPairRejected('coinbase', 400), true);
+  assert.equal(providers.isPairRejected('coinbase', 404), true); // {"message":"NotFound"}
+  for (const provider of ['binance', 'coinbase']) {
+    for (const status of [0, 403, 418, 429, 451, 500, 503]) {
+      assert.equal(providers.isPairRejected(provider, status), false, `${provider} ${status}`);
+    }
+  }
 });

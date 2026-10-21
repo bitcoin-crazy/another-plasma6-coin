@@ -85,9 +85,17 @@ Item {
         id: currencyModel
     }
 
+    // Where the prices come from. 'value' is saved in the configuration (priceProvider).
+    ListModel {
+        id: providerModel
+        ListElement { name: "Binance"; value: "binance" }
+        ListElement { name: "Coinbase"; value: "coinbase" }
+    }
+
     QtObject {
         id: cryptoValue
         property var currency
+        property var priceProvider
         property var coinName
         property var coinNameAbbreviation
         property var showPair
@@ -98,6 +106,7 @@ Item {
     property alias cfg_textBold: boldTextCkeck.checked
     property alias cfg_coinName: cryptoValue.coinName
     property alias cfg_currency: cryptoValue.currency
+    property alias cfg_priceProvider: cryptoValue.priceProvider
     property alias cfg_showCoinName: showCoinNameCheckBox.checked
     property alias cfg_showPair: showPairCheckBox.checked
     property alias cfg_decimalPlaces: decimalPlacesSpinBox.value
@@ -160,6 +169,25 @@ Item {
                 CheckBox {
                     id: boldTextCkeck
                     text: i18n("")
+                }
+
+                // Price Provider
+                Label {
+                    Layout.minimumWidth: root.width / 2
+                    text: i18n("Price Provider:")
+                    horizontalAlignment: Label.AlignRight
+                }
+                ComboBox {
+                    textRole: "name"
+                    valueRole: "value"
+                    id: priceProviderComboBox
+                    model: providerModel
+                    onActivated: {
+                        cryptoValue.priceProvider = currentValue
+                    }
+                    Component.onCompleted: currentIndex = Math.max(0, indexOfValue(cryptoValue.priceProvider))
+                    ToolTip.visible: hovered
+                    ToolTip.text: i18n("Where the prices come from. Binance is faster and recommended. Use Coinbase if Binance is blocked in your country. Coinbase has fewer coins and no USDT/USDC pairs for some coins: an unavailable pair shows Err.")
                 }
 
                 // From Crypto with tooltip

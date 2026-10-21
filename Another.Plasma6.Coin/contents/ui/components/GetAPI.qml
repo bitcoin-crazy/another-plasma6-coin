@@ -7,6 +7,7 @@
 import QtQuick
 
 Item {
+    property string provider: "binance" // "binance" or "coinbase", set by the parent from the config
     property string coinName: ""
     property string currencyAbbreviation: ""
     property int refreshRate: 3 // Refresh rate in minutes, set by the parent from the config
@@ -17,7 +18,7 @@ Item {
     property var price: null
     // True when the last request failed (network, timeout, HTTP error, bad data).
     property bool inErrorState: false
-    // True when Binance rejected the pair itself (HTTP 400, e.g. SOL/CZK does not exist).
+    // True when the provider rejected the pair itself (e.g. SOL/CZK does not exist on Binance).
     property bool invalidPair: false
 
     // Emitted by the automatic refresh timer only (not by clicks or retries),
@@ -30,6 +31,7 @@ Item {
     // A change of coin or currency invalidates the price shown so far.
     onCoinNameChanged: pairChanged()
     onCurrencyAbbreviationChanged: pairChanged()
+    onProviderChanged: pairChanged()
     onActiveChanged: {
         if (active)
             refreshSoon.restart();
@@ -44,12 +46,50 @@ Item {
         refreshSoon.restart(); // Debounced: coin and currency usually change together
     }
 
+    // ---- Price providers -------------------------------------------------------------
+    // To add a provider: a case in each of the four functions below, the entry in
+    // providerModel (GeneralConfig.qml) and the name in providerLabel().
+    // These functions are pure (they only use their arguments), so the CI tests run them.
+
+    // Unknown or empty values (for example, a damaged configuration) are treated as Binance.
+    function normalizeProvider(name) {
+        return name === "coinbase" ? "coinbase" : "binance";
+    }
+
+    function providerLabel(name) {
+        return normalizeProvider(name) === "coinbase" ? "Coinbase" : "Binance";
+    }
+
+    // URL of the price of the pair, e.g. BTC and USDT (Binance) or BTC and USD (Coinbase).
+    function buildUrl(name, coin, currency) {
+        const c = encodeURIComponent(coin);
+        const q = encodeURIComponent(currency);
+        if (normalizeProvider(name) === "coinbase")
+            return "https://api.exchange.coinbase.com/products/" + c + "-" + q + "/ticker"; // real market only, no conversions
+        return "https://api.binance.com/api/v3/ticker/price?symbol=" + c + q;
+    }
+
+    // Reads the price from the text of an HTTP 200 answer. Returns NaN if there is no price.
+    // Throws an error if the text is not valid JSON.
+    function parsePrice(name, text) {
+        const data = JSON.parse(text);
+        if (data === null || typeof data !== "object")
+            return NaN;
+        // Binance: {"symbol":"BTCUSDT","price":"67890.12000000"}
+        // Coinbase: {"trade_id":1,"price":"67890.12","size":"0.1","bid":"...","ask":"..."}
+        return parseFloat(data.price);
+    }
+
+    // True when the HTTP status means "this pair does not exist" (not a temporary failure).
+    function isPairRejected(name, status) {
+        return status === 400 || (normalizeProvider(name) === "coinbase" && status === 404);
+    }
+
     function updatePrice() {
         if (!active || coinName === "" || currencyAbbreviation === "")
             return;
 
-        const url = "https://api.binance.com/api/v3/ticker/price?symbol=" + coinName + currencyAbbreviation;
-        updateAPI(url);
+        updateAPI(buildUrl(provider, coinName, currencyAbbreviation));
     }
 
     function updateAPI(url) {
@@ -69,7 +109,7 @@ Item {
             requestTimeoutWatchdog.stop();
 
             if (pairRejected) {
-                console.error("AP6C: Binance rejected the pair " + coinName + currencyAbbreviation);
+                console.error("AP6C: " + providerLabel(provider) + " rejected the pair " + coinName + currencyAbbreviation);
                 price = null;
                 inErrorState = true;
                 invalidPair = true;
@@ -97,8 +137,7 @@ Item {
 
             if (req.status === 200) {
                 try {
-                    const data = JSON.parse(req.responseText);
-                    const p = parseFloat(data.price);
+                    const p = parsePrice(provider, req.responseText);
                     if (isNaN(p))
                         throw new Error("no numeric price in response");
                     finish(p, false, false);
@@ -106,7 +145,7 @@ Item {
                     console.error("AP6C: Error parsing API response:", e);
                     finish(null, true, false);
                 }
-            } else if (req.status === 400) {
+            } else if (isPairRejected(provider, req.status)) {
                 finish(null, false, true);
             } else {
                 console.error(`AP6C: Query failed with status: ${req.status}`);

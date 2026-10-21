@@ -49,6 +49,7 @@ ColumnLayout {
 
     Components.GetAPI {
         id: getApi
+        provider: Plasmoid.configuration.priceProvider
         coinName: Plasmoid.configuration.coinName
         currencyAbbreviation: Plasmoid.configuration.currency
         refreshRate: Plasmoid.configuration.timeRefresh || 3 // Integrating the refresh rate configuration

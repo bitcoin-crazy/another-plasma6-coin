@@ -3,6 +3,7 @@ import QtQuick
 ListModel {
     ListElement { name: "US Dollar Tether" ;             abbreviation: "USDT" }
     ListElement { name: "US Dollar Circle" ;             abbreviation: "USDC" }
+    ListElement { name: "US Dollar (Coinbase only)" ;    abbreviation: "USD" }
     ListElement { name: "Bitcoin" ;                      abbreviation: "BTC" }
     ListElement { name: "Ethereum" ;                     abbreviation: "ETH" }
     ListElement { name: "Binance Coin" ;                 abbreviation: "BNB" }
