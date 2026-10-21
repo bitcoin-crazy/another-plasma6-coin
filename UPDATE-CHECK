@@ -1,6 +1,7 @@
 - Clean the source code (commenting Debugs, etc).
 - Verify all comment in the code.
 - Run check-top-100.sh
+- Run check-coinmodel.sh
 - Test all configuration interface.
 - Update README.md if needed.
 - Update ChangeLog at GitHub.
