@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: Copyright 2025 zayronxio
- * SPDX-FileCopyrightText: Copyright 2025 bitcoin-crazy
+ * SPDX-FileCopyrightText: Copyright 2025-2026 bitcoin-crazy
  * SPDX-License-Identifier: GPL-3.0-or-later
  * SPDX-SnippetComment: Another Plasma6 Coin was initially based on Plasma Coin 1.0.2, from zayronxio.
  */

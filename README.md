@@ -19,7 +19,7 @@ I am an anonymous programmer and I developed this applet for my personal use. Fe
 
 A.P6.C gets prices from [Binance API](https://github.com/binance/binance-spot-api-docs), since version 2.0. Older versions were using [CoinGecko API](https://docs.coingecko.com/reference/introduction).
 
-Since version 2.5, [Coinbase API](https://docs.cdp.coinbase.com/exchange/introduction/welcome) can be selected in the `Configuration` window (`Price Provider`). It is useful where Binance is blocked. Coinbase has fewer coins than Binance, uses `USD` instead of `USDT`, and only real Coinbase pairs work (others show `Err`).
+Since version 3.0, [Coinbase API](https://docs.cdp.coinbase.com/exchange/introduction/welcome) can be selected in the `Configuration` window (`Price Provider`). It is useful where Binance is blocked. Coinbase has fewer coins than Binance, uses `USD` instead of `USDT`, and only real Coinbase pairs work (others show `Err`).
 
 Binance API x CoinGecko API:
 
