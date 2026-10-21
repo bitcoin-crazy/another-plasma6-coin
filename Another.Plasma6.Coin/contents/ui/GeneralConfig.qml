@@ -110,6 +110,7 @@ Item {
     property alias cfg_showCoinName: showCoinNameCheckBox.checked
     property alias cfg_showPair: showPairCheckBox.checked
     property alias cfg_decimalPlaces: decimalPlacesSpinBox.value
+    property alias cfg_horizontalLayout: horizontalLayoutCheckBox.checked
     property alias cfg_priceMultiplier: priceMultiplierField.text
     property alias cfg_useThousandsSeparator: thousandsSeparatorCheckBox.checked
     property alias cfg_swapCommasDots: swapCommasDotsCheckBox.checked
@@ -286,6 +287,21 @@ Item {
                             showCoinNameCheckBox.checked = false
                         }
                     }
+                }
+
+                // Horizontal Layout
+                Label {
+                    Layout.minimumWidth: root.width / 2
+                    text: i18n("Horizontal Layout:")
+                    horizontalAlignment: Label.AlignRight
+                }
+                CheckBox {
+                    id: horizontalLayoutCheckBox
+                    text: i18n("")
+                    checked: false
+                    onCheckedChanged: configurationChanged()
+                    ToolTip.visible: hovered
+                    ToolTip.text: i18n("Show the coin name (or pair) and the price in a single line (e.g., BTC/USDT 100,000). Useful for small panels.")
                 }
 
                 // Decimal Places

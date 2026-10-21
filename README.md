@@ -44,6 +44,7 @@ This applet displays coin prices in the toolbar and includes the following featu
 * Option to apply colors to prices.
 * Option to use a thousands separator.
 * Option to apply a price multiplier.
+* Option for a horizontal layout (name and price in a single line).
 * Optional file with your own coins. See _Your own coins_ below.
 * The `ERR` (Error) message is shown when an invalid coin pair is selected or another error occurs.
 
@@ -93,6 +94,7 @@ There are some options in `Configuration` window.
 * `Price Provider` selects where the prices come from: **Binance (default, recommended)** for better performance and more coins; Coinbase is an alternative when Binance is blocked in your country.
 * `From Crypto` will select the cryptocurrency, and `To Crypto/Currency` will select the pair to be used.
 * `Show Coin Name` and `Show Pair`: only one of these can be selected, but both can be unselected.
+* `Horizontal Layout` shows the coin name (or pair) and the price in a single line, e.g. `BTC/USDT 100000`, saving space in small panels. The name uses the same size as the price in this mode.
 * `Decimal Places` is for fractional numbers.
 * `Price Multiplier` allows the user to add an integer or a fractional number to multiply the current price. Up to 8 decimal places can be used. An asterisk will be placed near the coin/pair name to symbolize the use of this feature. E.g. BTC/USDT* See more details below in the section _When to use Price Multiplier?_
 * `Thousands Separator` adds commas to separate the thousands in the price.

@@ -7,6 +7,8 @@ X * Added XXX new coins.
   * Added Enabled option.
   * Added the Error Color option, used when 'Err' is displayed. Empty uses the
     theme's default error color.
+  * Added the Horizontal Layout option: coin name (or pair) and price in a
+    single line. Useful for small panels.
   * Added the Price Provider option: Binance (default) or Coinbase. Useful where
     Binance is blocked.
   * Added USD to the currency list (Coinbase only).

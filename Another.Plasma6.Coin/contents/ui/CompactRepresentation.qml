@@ -44,7 +44,10 @@ ColumnLayout {
         return decPart !== "" ? intPart + (swap ? "," : ".") + decPart : intPart;
     }
 
-    Layout.minimumWidth: coinNameText.implicitWidth + pixelFontVar * 4
+    // Single line: "BTC 100000" or "BTC/USDT 100000", instead of stacked lines
+    readonly property bool horizontal: Plasmoid.configuration.horizontalLayout
+
+    Layout.minimumWidth: (horizontal ? priceText.implicitWidth : coinNameText.implicitWidth) + pixelFontVar * 4
     Layout.minimumHeight: heightroot
 
     Components.GetAPI {
@@ -73,6 +76,17 @@ ColumnLayout {
             return Plasmoid.configuration.errorColor || Kirigami.Theme.negativeTextColor;
         }
         return Plasmoid.configuration.textColor || Kirigami.Theme.textColor;
+    }
+
+    // Coin name or pair shown before the price in horizontal layout (may be empty)
+    readonly property string horizontalLabel: {
+        if (Plasmoid.configuration.showCoinName) {
+            return coinNameText.text;
+        }
+        if (Plasmoid.configuration.showPair) {
+            return coinPairText.text;
+        }
+        return "";
     }
 
     // Determine which price text should be shown with multiplier applied
@@ -108,7 +122,7 @@ ColumnLayout {
 
     Text {
         id: coinNameText
-        visible: Plasmoid.configuration.showCoinName && Plasmoid.configuration.enabled
+        visible: Plasmoid.configuration.showCoinName && Plasmoid.configuration.enabled && !horizontal
         width: wrapper.width
         font.pixelSize: pixelFontVar2
         color: currentTextColor
@@ -121,7 +135,7 @@ ColumnLayout {
 
     Text {
         id: coinPairText
-        visible: Plasmoid.configuration.showPair && Plasmoid.configuration.enabled
+        visible: Plasmoid.configuration.showPair && Plasmoid.configuration.enabled && !horizontal
         width: wrapper.width
         font.pixelSize: pixelFontVar2
         color: currentTextColor
@@ -140,10 +154,10 @@ ColumnLayout {
         color: currentTextColor
         font.bold: Plasmoid.configuration.textBold
         font.capitalization: Font.AllUppercase
-        text: displayedPrice
+        text: (horizontal && horizontalLabel !== "" && Plasmoid.configuration.enabled ? horizontalLabel + " " : "") + displayedPrice
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignTop
-        wrapMode: Text.WordWrap
+        wrapMode: horizontal ? Text.NoWrap : Text.WordWrap
         height: 30
         opacity: 1.0
 
