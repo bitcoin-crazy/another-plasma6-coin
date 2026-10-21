@@ -468,26 +468,38 @@ Item {
 
                 // Donate BTC
                 Label {
-                    Layout.minimumWidth: root.width / 2
+                    Layout.columnSpan: 2
                     text: i18n("Donate BTC:")
-                    horizontalAlignment: Label.AlignRight
+                    font.bold: true
+                    topPadding: Kirigami.Units.largeSpacing
                 }
 
-                Label {
-                    Layout.minimumWidth: root.width / 2
+                TextField {
+                    Layout.columnSpan: 2
+                    Layout.fillWidth: true
                     text: "bc1ql06t7e7ukday0tfpw3jls2cr490r5hy70gm2v6"
+                    readOnly: true
+                    selectByMouse: true
+                    ToolTip.visible: hovered
+                    ToolTip.text: i18n("Click to select and copy")
                 }
 
                 // Donate SOL
                 Label {
-                    Layout.minimumWidth: root.width / 2
+                    Layout.columnSpan: 2
                     text: i18n("Donate SOL (SOL, USDC, etc.):")
-                    horizontalAlignment: Label.AlignRight
+                    font.bold: true
+                    topPadding: Kirigami.Units.largeSpacing
                 }
 
-                Label {
-                    Layout.minimumWidth: root.width / 2
+                TextField {
+                    Layout.columnSpan: 2
+                    Layout.fillWidth: true
                     text: "DM39WCa7u6XbEhJahC6pA7JQwiH56ciJNCefsPmnn5zp"
+                    readOnly: true
+                    selectByMouse: true
+                    ToolTip.visible: hovered
+                    ToolTip.text: i18n("Click to select and copy")
                 }
 
             }  // Closing GridLayout
