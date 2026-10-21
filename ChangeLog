@@ -1,5 +1,5 @@
 Version 3.0 - 2026-10-21
-X * Added XXX new coins.
+  * Added 13 new coins.
   * Added a website reference on UI.
   * Added an optional file with the user's own coins: ~/.ap6c.CoinModel.
     It uses the same format of CoinModel.qml and the coins are added to the end
