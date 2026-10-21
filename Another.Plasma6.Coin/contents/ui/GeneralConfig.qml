@@ -466,6 +466,30 @@ Item {
                     text: "https://github.com/bitcoin-crazy/"
                 }
 
+                // Donate BTC
+                Label {
+                    Layout.minimumWidth: root.width / 2
+                    text: i18n("Donate BTC:")
+                    horizontalAlignment: Label.AlignRight
+                }
+
+                Label {
+                    Layout.minimumWidth: root.width / 2
+                    text: "bc1ql06t7e7ukday0tfpw3jls2cr490r5hy70gm2v6"
+                }
+
+                // Donate SOL
+                Label {
+                    Layout.minimumWidth: root.width / 2
+                    text: i18n("Donate SOL (SOL, USDC, etc.):")
+                    horizontalAlignment: Label.AlignRight
+                }
+
+                Label {
+                    Layout.minimumWidth: root.width / 2
+                    text: "DM39WCa7u6XbEhJahC6pA7JQwiH56ciJNCefsPmnn5zp"
+                }
+
             }  // Closing GridLayout
         }      // Closing ColumnLayout
     }          // Closing ScrollView

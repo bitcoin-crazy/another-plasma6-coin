@@ -4,6 +4,7 @@ Version 3.0 - 2026-10-21
   * Added an optional file with the user's own coins: ~/.ap6c.CoinModel.
     It uses the same format of CoinModel.qml and the coins are added to the end
     of the 'From Crypto' list.
+  * Added donation addresses.
   * Added Enabled option.
   * Added the Error Color option, used when 'Err' is displayed. Empty uses the
     theme's default error color.

@@ -204,3 +204,12 @@ ListElement { name: "TRX" }
 ### Crypto/Currency names size
 
 The size of the Crypto/Currency names is 70% (0.7) of the price size. This can be changed at `~/.local/share/plasma/plasmoids/Another.Plasma6.Coin/contents/ui/CompactRepresentation.qml`. Search for `0.7`.
+
+## Sponsor this project
+
+If you find **Another Plasma6 Coin** useful and would like to support its development, you can send a donation.
+
+* Bitcoin (BTC): bc1ql06t7e7ukday0tfpw3jls2cr490r5hy70gm2v6
+* Solana (SOL, USDC, etc.): DM39WCa7u6XbEhJahC6pA7JQwiH56ciJNCefsPmnn5zp
+
+Every contribution helps me keep improving this applet and adding new features. Thank you! 🙏
